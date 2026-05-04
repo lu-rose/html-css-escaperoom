@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bug Report 05 — Content Missing from Screen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="progress" class="progress"></div>
+
+    <div class="bug-label">Bug Report 05 / 10</div>
+    <h1>Content Missing from Screen</h1>
+
+    <div class="ticket">
+      <div class="ticket-meta">
+        <span class="tag tag-open">Open</span>
+        <span>Reported by: QA Team</span>
+        <span>&middot;</span>
+        <span>Content not visible</span>
+      </div>
+      <p class="ticket-desc">
+       A section of content has completely disappeared from the page. It exists in
+       the codebase — it was not deleted — but users cannot see it anywhere on screen.
+       Find the hidden element in DevTools, fix its CSS so the entire word is fully visible
+       <strong>inside the box below</strong> without any clipping, and a button will appear to continue.
+      </p>
+    </div>
+
+    <div
+      id="puzzle-area"
+      class="puzzle"
+      style="position: relative; overflow: hidden; min-height: 160px; display: flex; align-items: center; justify-content: center;">
+
+      <p style="font-size: 13px; color: #b0b5d0; text-align: center; pointer-events: none; user-select: none;">
+        This section should contain content.<br>
+        <span style="font-size: 12px; color: #dde1f5;">Where did it go?</span>
+      </p>
+
+      <!-- Content pushed far off-screen — user must change left to bring it back -->
+      <div
+        id="missing-content"
+        style="position: absolute; left: -9999px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; font-weight: 700; color: #5865f5; letter-spacing: 3px; white-space: nowrap; font-family: -apple-system, sans-serif;">
+        OVERFLOW
+      </div>
+    </div>
+
+    <!-- Appears when the element is back inside the puzzle container -->
+    <div id="next-btn" style="display: none; margin-top: 1.25rem; padding: 1.25rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;">
+      <p style="font-size: 13px; color: #16a34a; font-weight: 600; margin-bottom: 10px;">&#10003; Content is back in view!</p>
+      <a href="task-6.html" style="display: inline-block; background: #5865f5; color: #ffffff; font-family: -apple-system, sans-serif; font-size: 13px; font-weight: 600; padding: 10px 22px; border-radius: 6px; text-decoration: none;">Next bug report &rarr;</a>
+    </div>
+
+    <button class="hint-toggle" onclick="toggleHint()">Need a hint?</button>
+    <div class="hint-box" id="hint">
+      In the <strong>Elements</strong> panel, look inside the puzzle box for
+      <code>&lt;div id="missing-content"&gt;</code>.
+      It has <code>left: -9999px</code> — a common technique that pushes an element
+      far off screen to the left.<br><br>
+      In the <strong>Styles</strong> pane, change <code>left</code> from
+      <code>-9999px</code> to <code>0</code>. The element will appear inside the
+      box and the next button will show up automatically.
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+  <script>
+    renderProgress(5);
+
+    function checkVisible() {
+      const el        = document.getElementById('missing-content');
+      const container = document.getElementById('puzzle-area');
+      const elRect    = el.getBoundingClientRect();
+      const cRect     = container.getBoundingClientRect();
+
+      // Full element width must be within the container — no left-side tolerance
+      const inside =
+        elRect.left   >= cRect.left        &&
+        elRect.right  <= cRect.right       &&
+        elRect.top    >= cRect.top    - 10 &&
+        elRect.bottom <= cRect.bottom + 10 &&
+        elRect.width  > 0;
+
+      document.getElementById('next-btn').style.display = inside ? 'block' : 'none';
+    }
+
+    setInterval(checkVisible, 400);
+  </script>
+</body>
+</html>

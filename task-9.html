@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bug Report 09 — Distracting Animation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="progress" class="progress"></div>
+
+    <div class="bug-label">Bug Report 09 / 10</div>
+    <h1>Distracting Animation</h1>
+
+    <div class="ticket">
+      <div class="ticket-meta">
+        <span class="tag tag-open">Open</span>
+        <span>Reported by: Users</span>
+        <span>&middot;</span>
+        <span>Animation interfering with content</span>
+      </div>
+      <p class="ticket-desc">
+        A spinning animation was added to a status indicator — but it is running so
+        fast that the text inside it is completely unreadable. Users cannot get the
+        information they need. Stop the animation and read what it says.
+      </p>
+    </div>
+
+    <div class="puzzle" style="display: flex; align-items: center; justify-content: center; min-height: 180px;">
+      <span
+        id="spinning"
+        style="display: inline-block; animation: spin-fast 0.22s linear infinite; font-size: 22px; font-weight: 700; letter-spacing: 4px; color: #5865f5; font-family: -apple-system, sans-serif;">
+        REFACTOR
+      </span>
+    </div>
+
+    <button class="hint-toggle" onclick="toggleHint()">Need a hint?</button>
+    <div class="hint-box" id="hint">
+      In the <strong>Elements</strong> panel, select <code>#spinning</code>.
+      In the <strong>Styles</strong> pane, click the area where you can add a new
+      declaration and type:<br><br>
+      <code>animation-play-state: paused</code><br><br>
+      This freezes the animation so you can read the text. What it says is your answer.
+    </div>
+
+    <form class="answer-row" onsubmit="checkAnswer(event, 'REFACTOR', 'task-10.html')">
+      <input type="text" class="answer-input" placeholder="What does it say when stopped?" autocomplete="off" spellcheck="false">
+      <button type="submit" class="btn-submit">Submit</button>
+    </form>
+    <div class="feedback" id="feedback"></div>
+  </div>
+
+  <script src="game.js"></script>
+  <script>renderProgress(9);</script>
+</body>
+</html>

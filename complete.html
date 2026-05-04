@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session Complete</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { align-items: center; text-align: center; }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #16a34a;
+      background: #dcfce7;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1.75rem;
+    }
+
+    .granted-no {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--accent);
+      margin-bottom: 4px;
+      animation: pulse-scale 2s ease-in-out infinite;
+    }
+
+    .granted-en {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    .victory-msg {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+    .victory-msg strong { color: var(--text); font-weight: 600; }
+
+    .resolved-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+      text-align: left;
+      display: inline-block;
+      min-width: 320px;
+    }
+
+    .resolved-list-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .resolved-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text);
+      padding: 5px 0;
+      border-bottom: 1px solid #f0f2ff;
+      line-height: 1.5;
+    }
+    .resolved-item:last-child { border-bottom: none; }
+
+    .check {
+      font-size: 12px;
+      color: #16a34a;
+      font-weight: 700;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .resolved-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+    }
+
+    .btn-replay {
+      display: inline-block;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-replay:hover { border-color: var(--accent); color: var(--accent); }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container">
+    <div class="status-pill">All 10 bugs resolved</div>
+
+    <div class="granted-no">Tilgang innvilget</div>
+    <div class="granted-en">Access granted</div>
+
+    <p class="victory-msg">
+      You worked through every bug report — inspecting, adjusting,<br>
+      and understanding what developers deal with every day.<br><br>
+      <strong>That is what collaboration between design and development looks like.</strong>
+    </p>
+
+    <div class="resolved-list">
+      <div class="resolved-list-title">Session summary</div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 01</span> Found a mismatched design token in the source</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 02</span> Discovered a transparent overlay blocking clicks</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 03</span> Read a developer note left in an HTML comment</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 04</span> Identified a hard-coded color that bypassed the design system</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 05</span> Located content pushed off-screen with a negative position</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 06</span> Fixed a broken flexbox layout by correcting item order</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 07</span> Made 1px invisible text readable again</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 08</span> Adjusted z-index to surface a hidden status message</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 09</span> Paused a runaway animation to read its content</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 10</span> Removed a stray disabled attribute to unlock the feature</div>
+      </div>
+    </div>
+
+    <a href="index.html" class="btn-replay">Play again</a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx    = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const COLORS = ['#5865f5', '#a5b4fc', '#fde047', '#fb923c', '#86efac', '#f9a8d4', '#ffffff'];
+
+    const particles = Array.from({ length: 160 }, () => ({
+      x:     Math.random() * window.innerWidth,
+      y:     Math.random() * -window.innerHeight,
+      w:     Math.random() * 10 + 4,
+      h:     Math.random() * 5  + 2,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      vy:    Math.random() * 2.5 + 1.5,
+      vx:    (Math.random() - 0.5) * 1.5,
+      rot:   Math.random() * 360,
+      rotV:  (Math.random() - 0.5) * 4,
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x + p.w / 2, p.y + p.h / 2);
+        ctx.rotate(p.rot * Math.PI / 180);
+        ctx.globalAlpha = 0.9;
+        ctx.fillStyle   = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+        p.y   += p.vy;
+        p.x   += p.vx;
+        p.rot += p.rotV;
+        if (p.y > canvas.height + 20) {
+          p.y = -20;
+          p.x = Math.random() * canvas.width;
+        }
+      });
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+</body>
+</html>

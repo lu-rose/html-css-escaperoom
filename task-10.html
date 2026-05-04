@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bug Report 10 — Feature Is Disabled</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #final-gate {
+      background: #e8eaf5;
+      border: 1.5px solid #dde1f5;
+      color: #b0b5d0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 14px 44px;
+      border-radius: 8px;
+      cursor: not-allowed;
+      transition: background 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+
+    #final-gate:not([disabled]) {
+      background: #5865f5;
+      border-color: #5865f5;
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(88, 101, 245, 0.35);
+    }
+
+    #final-gate:not([disabled]):hover {
+      background: #4752e0;
+      border-color: #4752e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="progress" class="progress"></div>
+
+    <div class="bug-label">Bug Report 10 / 10</div>
+    <h1>Feature Is Disabled</h1>
+
+    <div class="ticket">
+      <div class="ticket-meta">
+        <span class="tag tag-open">Open</span>
+        <span>Reported by: Product Owner</span>
+        <span>&middot;</span>
+        <span>Feature blocked from users</span>
+      </div>
+      <p class="ticket-desc">
+        The feature is built and working — but it was accidentally shipped with a
+        <code style="font-family:'Courier New',monospace;font-size:12px;background:#f0f2ff;padding:1px 5px;border-radius:3px;color:#5865f5;">disabled</code>
+        attribute left on the button. Remove the attribute to activate it, then
+        click it to complete the session.
+      </p>
+    </div>
+
+    <div class="puzzle" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; gap: 2rem;">
+      <div style="text-align: center;">
+        <p style="font-size: 12px; color: #b0b5d0; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; font-weight: 600;">Final checkpoint</p>
+        <p style="font-size: 13px; color: #b0b5d0;">The button will light up once the attribute is removed.</p>
+      </div>
+
+      <button
+        id="final-gate"
+        disabled
+        onclick="window.location='complete.html'">
+        Activate Feature
+      </button>
+    </div>
+
+    <button class="hint-toggle" onclick="toggleHint()">Need a hint?</button>
+    <div class="hint-box" id="hint">
+      In the <strong>Elements</strong> panel, find
+      <code>&lt;button id="final-gate"&gt;</code>.
+      You will see a <code>disabled</code> attribute on it.
+      Double-click the word <strong>disabled</strong> to select it, then press
+      <strong>Delete</strong> — or right-click it and choose
+      <strong>Delete attribute</strong>.<br><br>
+      The button will turn blue to confirm it is active. Click it to finish.
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+  <script>renderProgress(10);</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bug Report 03 — Hidden Information in the Code</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="progress" class="progress"></div>
+
+    <div class="bug-label">Bug Report 03 / 10</div>
+    <h1>Hidden Information in the Code</h1>
+
+    <div class="ticket">
+      <div class="ticket-meta">
+        <span class="tag tag-open">Open</span>
+        <span>Reported by: Product Owner</span>
+        <span>&middot;</span>
+        <span>Missing context</span>x
+      </div>
+      <p class="ticket-desc">
+        A developer who left the team embedded an important note directly in the
+        source code of this page before their last day. The note contains a key
+        piece of information for the next handoff. The page looks empty — but the
+        source never lies.
+      </p>
+    </div>
+
+    <!-- the code is: HANDOFF -->
+
+    <div class="puzzle" style="display: flex; align-items: center; justify-content: center; min-height: 180px;">
+      <p style="font-size: 14px; color: #dde1f5; text-align: center; line-height: 2;">
+        Nothing to see here.<br>
+        <span style="font-size: 12px; color: #e8eaf5;">Or is there?</span>
+      </p>
+    </div>
+
+    <button class="hint-toggle" onclick="toggleHint()">Need a hint?</button>
+    <div class="hint-box" id="hint">
+      View the page source by pressing <strong>Ctrl + U</strong> (Windows/Linux)
+      or <strong>Cmd + U</strong> (Mac). Or open DevTools and look through the
+      <strong>Elements</strong> panel. HTML comments start with
+      <code>&lt;!--</code> and end with <code>--&gt;</code>. The code is inside one of them.
+    </div>
+
+    <form class="answer-row" onsubmit="checkAnswer(event, 'HANDOFF', 'task-4.html')">
+      <input type="text" class="answer-input" placeholder="Enter the code from the comment..." autocomplete="off" spellcheck="false">
+      <button type="submit" class="btn-submit">Submit</button>
+    </form>
+    <div class="feedback" id="feedback"></div>
+  </div>
+
+  <script src="game.js"></script>
+  <script>renderProgress(3);</script>
+</body>
+</html>

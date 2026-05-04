@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Team Workshop</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { align-items: center; }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+
+    .workshop-title {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .workshop-sub {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .intro-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Role cards */
+    .roles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 2.5rem;
+    }
+
+    .role-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+
+    .role-card.highlight {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .role-tag {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .role-card.highlight .role-tag {
+      color: var(--accent);
+    }
+
+    .role-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .role-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* Mission box */
+    .mission-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .mission-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .mission-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.85;
+    }
+
+    .mission-text strong {
+      color: var(--accent);
+    }
+
+    .btn-start {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-start:hover { opacity: 0.88; }
+
+    .how-to {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 1.5rem;
+      line-height: 2.2;
+    }
+    .how-to strong { color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="badge">Fagdag 08.05.2026</div>
+    <h1 class="workshop-title">POV: You are a developer</h1>
+    <p class="workshop-sub">Understanding roles and debugging together</p>
+
+    <div class="mission-box">
+      <div class="mission-label">Your mission</div>
+      <p class="mission-text">
+        QA has filed <strong>10 bug reports</strong>. The developer is in back-to-back meetings.
+        Using only your browser's DevTools, investigate each issue — find what is wrong and enter the code to move on to the next one.
+      </p>
+    </div>
+
+    <div class="roles">
+      <div class="role-card">
+        <span class="role-tag">Role</span>
+        <div class="role-name">Product Owner</div>
+        <div class="role-desc">Defines priorities. Owns the backlog. Bridges business and team.</div>
+      </div>
+      <div class="role-card">
+        <span class="role-tag">Role</span>
+        <div class="role-name">Designer</div>
+        <div class="role-desc">Shapes the experience. Creates the visual language. Advocates for users.</div>
+      </div>
+      <div class="role-card highlight">
+        <span class="role-tag">Today's focus</span>
+        <div class="role-name">Developer</div>
+        <div class="role-desc">Builds the product. Turns designs into code. Navigates real-world constraints.</div>
+      </div>
+      <div class="role-card">
+        <span class="role-tag">Role</span>
+        <div class="role-name">QA / Tester</div>
+        <div class="role-desc">Ensures quality. Finds the bugs. Thinks in edge cases.</div>
+      </div>
+    </div>
+
+    <a href="task-1.html" class="btn-start">Start debugging</a>
+
+    <div class="how-to">
+      Open DevTools &rarr; <strong>F12</strong> or <strong>Cmd + Option + I</strong><br>
+    </div>
+  </div>
+</body>
+</html>
