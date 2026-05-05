@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Report 13 — Content Hidden Behind Other Elements</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <a href="task-12.html" class="back-link">← Back</a>
+      <div id="progress" class="progress"></div>
+
+      <div class="bug-label">Bug Report 13 / 14</div>
+      <h1>Content Hidden Behind Other Elements</h1>
+
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: QA Team</span>
+          <span>&middot;</span>
+          <span>Stacking order issue</span>
+        </div>
+        <p class="ticket-desc">
+          An important status message is not visible to users because another
+          element is stacked on top of it. Adjust the
+          <code style="font-family:'Courier New',monospace;font-size:12px;background:#f0f2ff;padding:1px 5px;border-radius:3px;color:#5865f5">z-index</code>
+          so the correct layer is on top. A button will appear when you get it right.
+        </p>
+      </div>
+
+      <div class="puzzle" style="position: relative; height: 180px">
+        <!-- Bottom layer -->
+        <div
+          id="layer-1"
+          style="
+            position: absolute;
+            top: 48px; left: 100px;
+            width: 190px; height: 85px;
+            background: #fafbff;
+            border: 1px solid #eef0fe;
+            border-radius: 8px;
+            z-index: 1;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 600;
+            color: #dde1f5; letter-spacing: 3px;
+            font-family: -apple-system, sans-serif;
+          "
+        >ARCHIVED</div>
+
+        <!-- Middle layer: should be visible -->
+        <div
+          id="layer-2"
+          style="
+            position: absolute;
+            top: 30px; left: 68px;
+            width: 215px; height: 95px;
+            background: #eef0fe;
+            border: 1.5px solid #5865f5;
+            border-radius: 8px;
+            z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 700;
+            color: #5865f5; letter-spacing: 3px;
+            font-family: -apple-system, sans-serif;
+          "
+        >VISIBLE</div>
+
+        <!-- Top layer: covering everything -->
+        <div
+          id="layer-3"
+          style="
+            position: absolute;
+            top: 10px; left: 30px;
+            width: 245px; height: 112px;
+            background: #ffffff;
+            border: 1px solid #dde1f5;
+            border-radius: 8px;
+            z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 600;
+            color: #1c1f3d; letter-spacing: 3px;
+            font-family: -apple-system, sans-serif;
+          "
+        >LOADING...</div>
+      </div>
+
+      <div
+        id="next-btn"
+        style="
+          display: none;
+          margin-top: 1.25rem;
+          padding: 1.25rem;
+          background: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          border-radius: 8px;
+        "
+      >
+        <p style="font-size:13px;color:#16a34a;font-weight:600;margin-bottom:10px">&#10003; Correct layer is now on top!</p>
+        <a
+          href="task-14.html"
+          style="display:inline-block;background:#5865f5;color:#fff;font-family:-apple-system,sans-serif;font-size:13px;font-weight:600;padding:10px 22px;border-radius:6px;text-decoration:none"
+        >Next bug report &rarr;</a>
+      </div>
+
+      <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
+      <div class="hint-box" id="hint">
+        In the <strong>Elements</strong> panel, find <code>#layer-3</code> — the
+        top element showing "LOADING...". In <strong>Styles</strong>, change its
+        <code>z-index</code> from <code>10</code> to <code>0</code> or
+        <code>1</code>. This slides it behind the other layers. When the correct
+        message is on top, a button will appear automatically.
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+    <script>
+      renderProgress(13, 14);
+
+      function checkZIndex() {
+        const z2 = parseInt(getComputedStyle(document.getElementById('layer-2')).zIndex) || 0;
+        const z3 = parseInt(getComputedStyle(document.getElementById('layer-3')).zIndex) || 0;
+        document.getElementById('next-btn').style.display = z2 > z3 ? 'block' : 'none';
+      }
+
+      setInterval(checkZIndex, 400);
+    </script>
+  </body>
+</html>

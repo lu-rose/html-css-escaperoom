@@ -3,125 +3,121 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bug Report 10 — Feature Is Disabled</title>
+    <title>Bug Report 10 — I can't breathe</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-      #final-gate {
-        background: #e8eaf5;
-        border: 1.5px solid #dde1f5;
-        color: #b0b5d0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        padding: 14px 44px;
-        border-radius: 8px;
-        cursor: not-allowed;
-        transition:
-          background 0.3s,
-          border-color 0.3s,
-          color 0.3s,
-          box-shadow 0.3s;
-      }
-
-      #final-gate:not([disabled]) {
-        background: #5865f5;
-        border-color: #5865f5;
-        color: #ffffff;
-        cursor: pointer;
-        box-shadow: 0 4px 14px rgba(88, 101, 245, 0.35);
-      }
-
-      #final-gate:not([disabled]):hover {
-        background: #4752e0;
-        border-color: #4752e0;
-      }
-    </style>
   </head>
   <body>
     <div class="container">
+      <a href="task-9.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 10 / 10</div>
-      <h1>Feature Is Disabled</h1>
+      <div class="bug-label">Bug Report 10 / 14</div>
+      <h1>"I can't breathe" — spacing so tight the code is hidden</h1>
 
       <div class="ticket">
         <div class="ticket-meta">
           <span class="tag tag-open">Open</span>
-          <span>Reported by: Product Owner</span>
+          <span>Reported by: Designer</span>
           <span>&middot;</span>
-          <span>Feature blocked from users</span>
+          <span>CSS · Spacing · Overlapping content</span>
         </div>
         <p class="ticket-desc">
-          The feature is built and working — but it was accidentally shipped
-          with a
-          <code
-            style="
-              font-family: &quot;Courier New&quot;, monospace;
-              font-size: 12px;
-              background: #f0f2ff;
-              padding: 1px 5px;
-              border-radius: 3px;
-              color: #5865f5;
-            "
-            >disabled</code
-          >
-          attribute left on the button. Remove the attribute to activate it.
+          Designer reports: <em>"I literally cannot breathe looking at this. Everything is squished together and I can't even read the confirmation code."</em>
+          Find the element in DevTools and fix the spacing so the text becomes readable.
+          Once the text has enough room to breathe, the answer field will unlock.
         </p>
       </div>
 
-      <div
-        class="puzzle"
-        style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          min-height: 200px;
-          gap: 2rem;
-        "
-      >
-        <div style="text-align: center">
-          <p
-            style="
-              font-size: 12px;
-              color: #b0b5d0;
-              letter-spacing: 1px;
-              margin-bottom: 6px;
-              text-transform: uppercase;
-              font-weight: 600;
-            "
+      <div class="puzzle">
+        <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#b0b5d0;margin-bottom:14px">
+          Order confirmation — inspect this
+        </p>
+
+        <div style="background:#fafbff;border:1px solid var(--border);border-radius:8px;padding:1.5rem;max-width:360px">
+          <div
+            id="squished-text"
+            style="line-height:0.6;font-size:18px;color:#f0f2ff;font-family:-apple-system,sans-serif"
           >
-            Final checkpoint
-          </p>
-          <p style="font-size: 13px; color: #b0b5d0">
-            The button will light up once the attribute is removed.
-          </p>
+            Order confirmed!<br>
+            Your confirmation code is:<br>
+            <strong style="letter-spacing:2px">FALCON-4892</strong><br>
+            Save this for your records.
+          </div>
         </div>
-
-        <button
-          id="final-gate"
-          disabled
-          onclick="window.location = 'complete.html'"
-        >
-          Activate Feature
-        </button>
       </div>
 
-      <button class="hint-toggle" onclick="toggleHint()">Stuck?? Need help?</button>
+      <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
       <div class="hint-box" id="hint">
-        In the <strong>Elements</strong> panel, find
-        <code>&lt;button id="final-gate"&gt;</code>. You will see a
-        <code>disabled</code> attribute on it. Double-click the word
-        <strong>disabled</strong> to select it, then press
-        <strong>Delete</strong> — or right-click it and choose
-        <strong>Delete attribute</strong>.<br /><br />
+        <strong>Step 1:</strong> In DevTools → <strong>Elements</strong>, find <code>&lt;div id="squished-text"&gt;</code>. In <strong>Styles</strong>, find <code>line-height: 0.6</code>.<br><br>
+        <strong>Step 2:</strong> Try changing the value live in DevTools — the text should start to breathe. The answer field unlocks automatically when the spacing is fixed.<br><br>
+        <strong>Step 3:</strong> WCAG recommends a minimum of 1.5 for body text. Enter the value you used.
       </div>
+
+      <form class="answer-row" onsubmit="checkLineHeight(event)">
+        <input
+          type="text"
+          class="answer-input"
+          id="lh-input"
+          placeholder="e.g. 1.5"
+          autocomplete="off"
+          spellcheck="false"
+          disabled
+        />
+        <button type="submit" class="btn-submit" disabled>Submit</button>
+      </form>
+      <div class="feedback" id="feedback"></div>
     </div>
 
     <script src="game.js"></script>
     <script>
-      renderProgress(10);
+      renderProgress(10, 14);
+
+      function checkLineHeightFixed() {
+        const el  = document.getElementById('squished-text');
+        const lh  = parseFloat(getComputedStyle(el).lineHeight);
+        const fs  = parseFloat(getComputedStyle(el).fontSize);
+        const ratio = lh / fs;
+
+        const input = document.querySelector('.answer-input');
+        const btn   = document.querySelector('.btn-submit');
+        const unlocked = ratio >= 1.5;
+
+        input.disabled = !unlocked;
+        btn.disabled   = !unlocked;
+      }
+
+      setInterval(checkLineHeightFixed, 400);
+
+      function checkLineHeight(e) {
+        e.preventDefault();
+        const raw = document.getElementById('lh-input').value.trim();
+        const val = parseFloat(raw);
+        const fb  = document.getElementById('feedback');
+
+        if (isNaN(val)) {
+          fb.textContent = '✗ Enter a number.';
+          fb.className   = 'feedback err';
+          return;
+        }
+
+        if (val === 0.6) {
+          fb.textContent = "✗ That's the broken value.";
+          fb.className   = 'feedback err';
+          return;
+        }
+
+        if (val < 1.5) {
+          fb.textContent = '✗ Still too tight — try a higher value.';
+          fb.className   = 'feedback err';
+          return;
+        }
+
+        fb.textContent = '✓ Room to breathe! Moving on...';
+        fb.className   = 'feedback ok';
+        document.getElementById('lh-input').disabled = true;
+        document.querySelector('.btn-submit').disabled = true;
+        setTimeout(() => { window.location = 'task-11.html'; }, 1400);
+      }
     </script>
   </body>
 </html>

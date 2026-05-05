@@ -3,152 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bug Report 05 — Content Missing from Screen</title>
+    <title>Bug Report 05 — Hidden Information in the Code</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
+      <a href="task-4.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 05 / 10</div>
-      <h1>Content Missing from Screen</h1>
+      <div class="bug-label">Bug Report 05 / 14</div>
+      <h1>Hidden Information in the Code</h1>
 
       <div class="ticket">
         <div class="ticket-meta">
           <span class="tag tag-open">Open</span>
-          <span>Reported by: QA Team</span>
+          <span>Reported by: Product Owner</span>
           <span>&middot;</span>
-          <span>Content not visible</span>
+          <span>Missing context</span>
         </div>
         <p class="ticket-desc">
-          A section of content has completely disappeared from the page. It
-          exists in the codebase, it was not deleted, but users cannot see it
-          anywhere on screen. Find the hidden element, fix its CSS so the entire
-          word is fully visible
-          <strong>inside the box below</strong> without any clipping, and a
-          button will appear to continue.
+          A developer who left the team embedded an important note directly in
+          the source code of this page before their last day. The note contains
+          a key piece of information for the next handoff. The page looks empty
+          — but the source never lies.
         </p>
       </div>
 
+      <!-- the code is: HANDOFF -->
+
       <div
-        id="puzzle-area"
         class="puzzle"
         style="
-          position: relative;
-          overflow: hidden;
-          min-height: 160px;
           display: flex;
           align-items: center;
           justify-content: center;
+          min-height: 180px;
         "
       >
         <p
           style="
-            font-size: 13px;
-            color: #b0b5d0;
+            font-size: 14px;
+            color: #dde1f5;
             text-align: center;
-            pointer-events: none;
-            user-select: none;
+            line-height: 2;
           "
         >
-          This section should contain content.<br />
-          <span style="font-size: 12px; color: #dde1f5">Where did it go?</span>
+          Nothing to see here.<br />
+          <span style="font-size: 12px; color: #e8eaf5">Or is there?</span>
         </p>
-
-        <!-- Content pushed far off-screen -->
-        <div
-          id="missing-content"
-          style="
-            position: absolute;
-            left: -9999px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #5865f5;
-            letter-spacing: 3px;
-            white-space: nowrap;
-            font-family: -apple-system, sans-serif;
-          "
-        >
-          OVERFLOW
-        </div>
       </div>
 
-      <div
-        id="next-btn"
-        style="
-          display: none;
-          margin-top: 1.25rem;
-          padding: 1.25rem;
-          background: #f0fdf4;
-          border: 1px solid #bbf7d0;
-          border-radius: 8px;
-        "
-      >
-        <p
-          style="
-            font-size: 13px;
-            color: #16a34a;
-            font-weight: 600;
-            margin-bottom: 10px;
-          "
-        >
-          &#10003; Content is back in view!
-        </p>
-        <a
-          href="task-6.html"
-          style="
-            display: inline-block;
-            background: #5865f5;
-            color: #ffffff;
-            font-family: -apple-system, sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 10px 22px;
-            border-radius: 6px;
-            text-decoration: none;
-          "
-          >Next bug report &rarr;</a
-        >
-      </div>
-
-      <button class="hint-toggle" onclick="toggleHint()">Stuck?? Need help?</button>
+      <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
       <div class="hint-box" id="hint">
-        In the <strong>Elements</strong> panel, look inside the puzzle box for
-        <code>&lt;div id="missing-content"&gt;</code>. It has
-        <code>left: -9999px</code> — a common technique that pushes an element
-        far off screen to the left.<br /><br />
-        In the <strong>Styles</strong> pane, change <code>left</code>. The
-        element will appear inside the box and the next button will show up
-        automatically.
+        View the page source by pressing
+        <strong>Ctrl + U</strong> (Windows/Linux) or
+        <strong>Cmd + U</strong> (Mac). Or open DevTools and look through the
+        <strong>Elements</strong> panel. HTML comments start with
+        <code>&lt;!--</code> and end with <code>--&gt;</code>. The code is
+        inside one of them.
       </div>
+
+      <form
+        class="answer-row"
+        onsubmit="checkAnswer(event, 'SEFORE9GRg==', 'task-6.html')"
+      >
+        <input
+          type="text"
+          class="answer-input"
+          placeholder="Enter the code from the comment..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+      <div class="feedback" id="feedback"></div>
     </div>
 
     <script src="game.js"></script>
     <script>
-      renderProgress(5);
-
-      function checkVisible() {
-        const el = document.getElementById("missing-content");
-        const container = document.getElementById("puzzle-area");
-        const elRect = el.getBoundingClientRect();
-        const cRect = container.getBoundingClientRect();
-
-        // Full element width must be within the container — no left-side tolerance
-        const inside =
-          elRect.left >= cRect.left &&
-          elRect.right <= cRect.right &&
-          elRect.top >= cRect.top - 10 &&
-          elRect.bottom <= cRect.bottom + 10 &&
-          elRect.width > 0;
-
-        document.getElementById("next-btn").style.display = inside
-          ? "block"
-          : "none";
-      }
-
-      setInterval(checkVisible, 400);
+      renderProgress(5, 14);
     </script>
   </body>
 </html>

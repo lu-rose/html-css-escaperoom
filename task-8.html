@@ -3,121 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bug Report 08 — Content Hidden Behind Other Elements</title>
+    <title>Bug Report 08 — Content Missing from Screen</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
+      <a href="task-7.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 08 / 10</div>
-      <h1>Content Hidden Behind Other Elements</h1>
+      <div class="bug-label">Bug Report 08 / 14</div>
+      <h1>Content Missing from Screen</h1>
 
       <div class="ticket">
         <div class="ticket-meta">
           <span class="tag tag-open">Open</span>
           <span>Reported by: QA Team</span>
           <span>&middot;</span>
-          <span>Stacking order issue</span>
+          <span>Content not visible</span>
         </div>
         <p class="ticket-desc">
-          An important status message is not visible to users because another
-          element is stacked on top of it. Adjust the
-          <code
-            style="
-              font-family: &quot;Courier New&quot;, monospace;
-              font-size: 12px;
-              background: #f0f2ff;
-              padding: 1px 5px;
-              border-radius: 3px;
-              color: #5865f5;
-            "
-            >z-index</code
-          >
-          so the correct layer is on top. A button will appear when you get it
-          right.
+          A section of content has completely disappeared from the page. It
+          exists in the codebase, it was not deleted, but users cannot see it
+          anywhere on screen. Find the hidden element, fix its CSS so the entire
+          word is fully visible
+          <strong>inside the box below</strong> without any clipping, and a
+          button will appear to continue.
         </p>
       </div>
 
-      <div class="puzzle" style="position: relative; height: 180px">
-        <!-- Bottom layer -->
-        <div
-          id="layer-1"
+      <div
+        id="puzzle-area"
+        class="puzzle"
+        style="
+          position: relative;
+          overflow: hidden;
+          min-height: 160px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <p
           style="
-            position: absolute;
-            top: 48px;
-            left: 100px;
-            width: 190px;
-            height: 85px;
-            background: #fafbff;
-            border: 1px solid #eef0fe;
-            border-radius: 8px;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 13px;
-            font-weight: 600;
-            color: #dde1f5;
-            letter-spacing: 3px;
-            font-family: -apple-system, sans-serif;
+            color: #b0b5d0;
+            text-align: center;
+            pointer-events: none;
+            user-select: none;
           "
         >
-          ARCHIVED
-        </div>
-        <!-- Middle layer: the status that should be visible -->
+          This section should contain content.<br />
+          <span style="font-size: 12px; color: #dde1f5">Where did it go?</span>
+        </p>
+
+        <!-- Content pushed far off-screen -->
         <div
-          id="layer-2"
+          id="missing-content"
           style="
             position: absolute;
-            top: 30px;
-            left: 68px;
-            width: 215px;
-            height: 95px;
-            background: #eef0fe;
-            border: 1.5px solid #5865f5;
-            border-radius: 8px;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
+            left: -9999px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
             font-weight: 700;
             color: #5865f5;
             letter-spacing: 3px;
+            white-space: nowrap;
             font-family: -apple-system, sans-serif;
           "
         >
-          VISIBLE
-        </div>
-        <!-- Top layer -->
-        <div
-          id="layer-3"
-          style="
-            position: absolute;
-            top: 10px;
-            left: 30px;
-            width: 245px;
-            height: 112px;
-            background: #ffffff;
-            border: 1px solid #dde1f5;
-            border-radius: 8px;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 600;
-            color: #1c1f3d;
-            letter-spacing: 3px;
-            font-family: -apple-system, sans-serif;
-          "
-        >
-          LOADING...
+          OVERFLOW
         </div>
       </div>
 
-      <!-- Appears automatically when the correct layer is on top -->
       <div
         id="next-btn"
         style="
@@ -129,15 +87,8 @@
           border-radius: 8px;
         "
       >
-        <p
-          style="
-            font-size: 13px;
-            color: #16a34a;
-            font-weight: 600;
-            margin-bottom: 10px;
-          "
-        >
-          &#10003; Correct layer is now on top!
+        <p style="font-size: 13px; color: #16a34a; font-weight: 600; margin-bottom: 10px;">
+          &#10003; Content is back in view!
         </p>
         <a
           href="task-9.html"
@@ -152,38 +103,42 @@
             border-radius: 6px;
             text-decoration: none;
           "
-          >Next bug report &rarr;</a
-        >
+        >Next bug report &rarr;</a>
       </div>
 
-      <button class="hint-toggle" onclick="toggleHint()">Stuck?? Need help?</button>
+      <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
       <div class="hint-box" id="hint">
-        In the <strong>Elements</strong> panel, find <code>#layer-3</code> — the
-        top element showing "LOADING...". In <strong>Styles</strong>, change its
-        <code>z-index</code> from <code>10</code> to <code>0</code> or
-        <code>1</code>. This slides it behind the other layers. When the correct
-        message is on top, a button will appear automatically.
+        In the <strong>Elements</strong> panel, look inside the puzzle box for
+        <code>&lt;div id="missing-content"&gt;</code>. It has
+        <code>left: -9999px</code> — a common technique that pushes an element
+        far off screen to the left.<br /><br />
+        In the <strong>Styles</strong> pane, change <code>left</code>. The
+        element will appear inside the box and the next button will show up
+        automatically.
       </div>
     </div>
 
     <script src="game.js"></script>
     <script>
-      renderProgress(8);
+      renderProgress(8, 14);
 
-      function checkZIndex() {
-        const z2 =
-          parseInt(
-            getComputedStyle(document.getElementById("layer-2")).zIndex,
-          ) || 0;
-        const z3 =
-          parseInt(
-            getComputedStyle(document.getElementById("layer-3")).zIndex,
-          ) || 0;
-        document.getElementById("next-btn").style.display =
-          z2 > z3 ? "block" : "none";
+      function checkVisible() {
+        const el        = document.getElementById('missing-content');
+        const container = document.getElementById('puzzle-area');
+        const elRect    = el.getBoundingClientRect();
+        const cRect     = container.getBoundingClientRect();
+
+        const inside =
+          elRect.left   >= cRect.left &&
+          elRect.right  <= cRect.right &&
+          elRect.top    >= cRect.top - 10 &&
+          elRect.bottom <= cRect.bottom + 10 &&
+          elRect.width  > 0;
+
+        document.getElementById('next-btn').style.display = inside ? 'block' : 'none';
       }
 
-      setInterval(checkZIndex, 400);
+      setInterval(checkVisible, 400);
     </script>
   </body>
 </html>
