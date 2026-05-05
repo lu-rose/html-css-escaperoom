@@ -24,8 +24,8 @@
         <p class="ticket-desc">
           Users are struggling to read a piece of important information on this
           page. The text exists in the DOM, but something about its styling
-          makes it nearly impossible to see. Identify the problem, fix it in
-          DevTools, and read what it says.
+          makes it nearly impossible to see. Fix it in DevTools to unlock the
+          answer field, then enter what it says.
         </p>
       </div>
 
@@ -78,8 +78,9 @@
           placeholder="What does the text say?"
           autocomplete="off"
           spellcheck="false"
+          disabled
         />
-        <button type="submit" class="btn-submit">Submit</button>
+        <button type="submit" class="btn-submit" disabled>Submit</button>
       </form>
       <div class="feedback" id="feedback"></div>
     </div>
@@ -87,6 +88,22 @@
     <script src="game.js"></script>
     <script>
       renderProgress(11, 14);
+
+      function checkFontSize() {
+        const el      = document.getElementById('tiny-text');
+        const fs      = parseFloat(getComputedStyle(el).fontSize);
+        const fixed   = fs > 1;
+        const input   = document.querySelector('.answer-input');
+        const btn     = document.querySelector('.btn-submit');
+        input.disabled = !fixed;
+        btn.disabled   = !fixed;
+        if (fixed && !input.dataset.focused) {
+          input.focus();
+          input.dataset.focused = '1';
+        }
+      }
+
+      setInterval(checkFontSize, 400);
     </script>
   </body>
 </html>
