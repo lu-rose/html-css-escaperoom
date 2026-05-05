@@ -1,61 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bug Report 07 — Text Is Hard to Read</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <div id="progress" class="progress"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Report 07 — Text Is Hard to Read</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="progress" class="progress"></div>
 
-    <div class="bug-label">Bug Report 07 / 10</div>
-    <h1>Text Is Hard to Read</h1>
+      <div class="bug-label">Bug Report 07 / 10</div>
+      <h1>Text Is Hard to Read</h1>
 
-    <div class="ticket">
-      <div class="ticket-meta">
-        <span class="tag tag-open">Open</span>
-        <span>Reported by: Accessibility audit</span>
-        <span>&middot;</span>
-        <span>Readability issue</span>
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: Accessibility audit</span>
+          <span>&middot;</span>
+          <span>Readability issue</span>
+        </div>
+        <p class="ticket-desc">
+          Users are struggling to read a piece of important information on this
+          page. The text exists in the DOM, but something about its styling
+          makes it nearly impossible to see. Identify the problem, fix it in
+          DevTools, and read what it says.
+        </p>
       </div>
-      <p class="ticket-desc">
-        Users are struggling to read a piece of important information on this page.
-        The text exists in the DOM, but something about its styling makes it nearly
-        impossible to see. Identify the problem, fix it in DevTools, and read what
-        it says.
-      </p>
+
+      <div
+        class="puzzle"
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 180px;
+          gap: 1.5rem;
+        "
+      >
+        <span
+          id="tiny-text"
+          style="
+            font-size: 0.5px;
+            color: #1c1f3d;
+            letter-spacing: 0;
+            line-height: 1;
+            display: block;
+            user-select: text;
+            font-family: -apple-system, sans-serif;
+          "
+        >
+          REVIEW
+        </span>
+        <p style="font-size: 12px; color: #b0b5d0; text-align: center">
+          There is text in this box. Can you read it?
+        </p>
+      </div>
+
+      <button class="hint-toggle" onclick="toggleHint()">Stuck?? Need help?</button>
+      <div class="hint-box" id="hint">
+        In the <strong>Elements</strong> panel, find
+        <code>&lt;span id="tiny-text"&gt;</code>. In the
+        <strong>Styles</strong> pane, find <code>font-size</code> and change it
+        from <code>0.5px</code> to something like <code>32px</code>. Read what
+        the text says — that is your answer.
+      </div>
+
+      <form
+        class="answer-row"
+        onsubmit="checkAnswer(event, 'REVIEW', 'task-8.html')"
+      >
+        <input
+          type="text"
+          class="answer-input"
+          placeholder="What does the text say?"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+      <div class="feedback" id="feedback"></div>
     </div>
 
-    <div class="puzzle" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 180px; gap: 1.5rem;">
-      <span
-        id="tiny-text"
-        style="font-size: 0.5px; color: #1c1f3d; letter-spacing: 0; line-height: 1; display: block; user-select: text; font-family: -apple-system, sans-serif;">
-        REVIEW
-      </span>
-      <p style="font-size: 12px; color: #b0b5d0; text-align: center;">
-        There is text in this box. Can you read it?
-      </p>
-    </div>
-
-    <button class="hint-toggle" onclick="toggleHint()">Need a hint?</button>
-    <div class="hint-box" id="hint">
-      In the <strong>Elements</strong> panel, find
-      <code>&lt;span id="tiny-text"&gt;</code>.
-      In the <strong>Styles</strong> pane, find <code>font-size</code> and change it
-      from <code>0.5px</code> to something like <code>32px</code>.
-      Read what the text says — that is your answer.
-    </div>
-
-    <form class="answer-row" onsubmit="checkAnswer(event, 'REVIEW', 'task-8.html')">
-      <input type="text" class="answer-input" placeholder="What does the text say?" autocomplete="off" spellcheck="false">
-      <button type="submit" class="btn-submit">Submit</button>
-    </form>
-    <div class="feedback" id="feedback"></div>
-  </div>
-
-  <script src="game.js"></script>
-  <script>renderProgress(7);</script>
-</body>
+    <script src="game.js"></script>
+    <script>
+      renderProgress(7);
+    </script>
+  </body>
 </html>

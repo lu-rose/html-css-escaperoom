@@ -14,7 +14,7 @@ function toggleHint() {
   const hint   = document.getElementById('hint');
   const toggle = document.querySelector('.hint-toggle');
   const visible = hint.classList.toggle('visible');
-  toggle.textContent = visible ? 'Hide hint' : 'Need a hint?';
+  toggle.textContent = visible ? 'Hide help' : 'Stuck? Need help?';
 }
 
 function checkAnswer(e, answer, next) {
