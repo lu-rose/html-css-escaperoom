@@ -27,8 +27,16 @@ function checkAnswer(e, enc, next) {
   const input = document.querySelector(".answer-input");
   const val = input.value.trim().toUpperCase();
   const fb = document.getElementById("feedback");
+  const expected = answer.trim().toUpperCase();
+  const isHexAnswer = /^#?[0-9A-F]{3}([0-9A-F]{3})?([0-9A-F]{2})?$/.test(
+    expected
+  );
+  const normalizedVal = isHexAnswer ? val.replace(/^#/, "") : val;
+  const normalizedExpected = isHexAnswer
+    ? expected.replace(/^#/, "")
+    : expected;
 
-  if (val === answer.toUpperCase()) {
+  if (normalizedVal === normalizedExpected) {
     fb.textContent = "✓ Correct — moving to the next bug report...";
     fb.className = "feedback ok";
     input.disabled = true;
