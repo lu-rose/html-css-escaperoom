@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bug Report 08 — Content Missing from Screen</title>
+    <title>Bug Report 04 — Content Missing from Screen</title>
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container">
-      <a href="task-7.html" class="back-link">← Back</a>
+      <a href="03-button-text-contrast.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 08 / 14</div>
+      <div class="bug-label">Bug Report 04 / 14</div>
       <h1>Content Missing from Screen</h1>
 
       <div class="ticket">
@@ -98,7 +98,7 @@
           &#10003; Content is back in view!
         </p>
         <a
-          href="task-9.html"
+          href="05-flex-order-layout.html"
           style="
             display: inline-block;
             background: #5865f5;
@@ -118,17 +118,28 @@
         Stuck? Need help?
       </button>
       <div class="hint-box" id="hint">
-        In the <strong>Elements</strong> panel, look inside the puzzle box for
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Start by inspecting the key element in this task and look for the one property or attribute that is causing the bug.
+        </p>
+
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            In the <strong>Elements</strong> panel, look inside the puzzle box for
         <code>&lt;div id="missing-content"&gt;</code>. It has
         <code>left: -9999px</code> — a common technique that pushes an element
         far off screen to the left.<br /><br />
         In the <strong>Styles</strong> pane, change <code>left</code>.
+          </div>
+        </details>
       </div>
     </div>
 
     <script src="../game.js"></script>
     <script>
-      renderProgress(8, 14);
+      renderProgress(4, 14);
 
       function checkVisible() {
         const el = document.getElementById("missing-content");

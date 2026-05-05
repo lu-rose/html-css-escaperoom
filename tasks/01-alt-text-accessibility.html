@@ -3,17 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Bug Report 02 — The screen readers cannot see the product image
+    <title>Bug Report 01 — The screen readers cannot see the product image
     </title>
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container">
-      <a href="task-1.html" class="back-link">← Back</a>
+      <a href="../index.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 02 / 14</div>
+      <div class="bug-label">Bug Report 01 / 14</div>
       <h1>The screen readers cannot see the product image</h1>
 
       <div class="ticket">
@@ -155,16 +154,29 @@
         Stuck? Need help?
       </button>
       <div class="hint-box" id="hint">
-        <strong>Step 1:</strong> Open DevTools →
-        <strong>Elements</strong> panel. Find the
-        <code>&lt;img id="product-img"&gt;</code> tag and look at its
-        <code>alt</code> attribute — it is empty (<code>alt=""</code>).<br /><br />
-        <strong>Step 2:</strong> Look at the image. What do you see? Discuss as
-        a team what a screen reader user should hear when they land on this
-        card.<br /><br />
-        <strong>Step 3:</strong> Write a short description. Any answer that
-        describes what is in the image is accepted — the goal is the
-        conversation about what <em>good</em> alt text looks like.
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Start by inspecting the key element in this
+          task and look for the one property or attribute that is causing the
+          bug.
+        </p>
+
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            <strong>Step 1:</strong> Open DevTools →
+            <strong>Elements</strong> panel. Find the
+            <code>&lt;img id="product-img"&gt;</code> tag and look at its
+            <code>alt</code> attribute — it is empty (<code>alt=""</code>).<br /><br />
+            <strong>Step 2:</strong> Look at the image. What do you see? Discuss
+            as a team what a screen reader user should hear when they land on
+            this card.<br /><br />
+            <strong>Step 3:</strong> Write a short description. Any answer that
+            describes what is in the image is accepted — the goal is the
+            conversation about what <em>good</em> alt text looks like.
+          </div>
+        </details>
       </div>
 
       <form class="answer-row" onsubmit="checkAltAnswer(event)">
@@ -183,7 +195,7 @@
 
     <script src="../game.js"></script>
     <script>
-      renderProgress(2, 14);
+      renderProgress(1, 14);
 
       function checkAltAnswer(e) {
         e.preventDefault();
@@ -202,14 +214,17 @@
         const keywords = [
           "watch",
           "klokke",
+          "clock",
           "timepiece",
           "ur",
           "minimalist",
           "product",
           "hvit",
+          "white",
           "image",
           "picture",
           "bilde",
+          "produkt",
         ];
         const accepted = keywords.some((k) => val.includes(k));
 
@@ -220,7 +235,7 @@
           document.getElementById("alt-input").disabled = true;
           document.querySelector(".btn-submit").disabled = true;
           setTimeout(() => {
-            window.location = "task-3.html";
+            window.location = "02-hidden-comment.html";
           }, 1400);
         } else {
           fb.textContent =

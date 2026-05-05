@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bug Report 03 — Button That Does Nothing</title>
+    <title>Bug Report 07 — Button That Does Nothing</title>
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container">
-      <a href="task-2.html" class="back-link">← Back</a>
+      <a href="06-line-height-spacing.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 03 / 14</div>
+      <div class="bug-label">Bug Report 07 / 14</div>
       <h1>Button That Does Nothing</h1>
 
       <div class="ticket">
@@ -59,7 +59,7 @@
           <!-- The actual button -->
           <button
             id="deploy-btn"
-            onclick="window.location = 'task-4.html'"
+            onclick="window.location = '08-wrong-color-swatch.html'"
             style="
               position: relative;
               z-index: 1;
@@ -97,19 +97,30 @@
         Stuck? Need help?
       </button>
       <div class="hint-box" id="hint">
-        In the <strong>Elements</strong> panel, look at the HTML around the
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Start by inspecting the key element in this task and look for the one property or attribute that is causing the bug.
+        </p>
+
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            In the <strong>Elements</strong> panel, look at the HTML around the
         button. There is a <code>&lt;div id="blocker"&gt;</code> sitting
         directly on top of it with a higher <code>z-index</code>. This
         transparent div intercepts every click before it reaches the button.<br /><br />
         Select the blocker element, then press <strong>Delete</strong> on your
         keyboard — or right-click it and choose <strong>Delete element</strong>.
         Once removed, clicking the button will take you to the next task.
+          </div>
+        </details>
       </div>
     </div>
 
     <script src="../game.js"></script>
     <script>
-      renderProgress(3, 14);
+      renderProgress(7, 14);
     </script>
   </body>
 </html>

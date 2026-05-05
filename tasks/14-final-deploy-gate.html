@@ -38,7 +38,7 @@
   </head>
   <body>
     <div class="container">
-      <a href="task-13.html" class="back-link">← Back</a>
+      <a href="13-design-token-mismatch.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
       <div class="bug-label">Bug Report 14 / 14</div>
@@ -101,12 +101,23 @@
         Stuck? Need help?
       </button>
       <div class="hint-box" id="hint">
-        In the <strong>Elements</strong> panel, inspect
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Start by inspecting the key element in this task and look for the one property or attribute that is causing the bug.
+        </p>
+
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            In the <strong>Elements</strong> panel, inspect
         <code>&lt;button id="final-gate"&gt;</code>. Look for what is locking
         the control and remove that blocker. <br /><br />
         <strong>If you're really stuck:</strong> the button is blocked by the
         <code>disabled</code> attribute. Delete that attribute in DevTools, and
         the <strong>Deploy to Prod</strong> button will activate.
+          </div>
+        </details>
       </div>
     </div>
 

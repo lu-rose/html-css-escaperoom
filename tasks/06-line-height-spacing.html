@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bug Report 09 — I can't breathe</title>
+    <title>Bug Report 06 — I can't breathe</title>
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container">
-      <a href="task-8.html" class="back-link">← Back</a>
+      <a href="05-flex-order-layout.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 09 / 14</div>
+      <div class="bug-label">Bug Report 06 / 14</div>
       <h1>"I can't breathe" — spacing so tight!!</h1>
 
       <div class="ticket">
@@ -27,9 +27,12 @@
             >"I literally cannot breathe looking at this. Everything is squished
             together and I can't even read the confirmation code."</em
           >
-          Fix the spacing so the text becomes readable. Once the text has enough
-          room to breathe, the answer field will unlock. Follow the WCAG
-          guidelines for readability and
+          Fix the spacing so the text becomes readable.
+          <strong
+            >Once the text has enough room to breathe, the answer field will
+            unlock.</strong
+          >
+          Follow the WCAG guidelines for readability and
           <code
             style="
               font-family: &quot;Courier New&quot;, monospace;
@@ -70,7 +73,7 @@
           <div
             id="squished-text"
             style="
-              line-height: 0.6;
+              line-height: 0.4;
               font-size: 18px;
               font-family: -apple-system, sans-serif;
             "
@@ -87,14 +90,29 @@
         Stuck? Need help?
       </button>
       <div class="hint-box" id="hint">
-        <strong>Step 1:</strong> In DevTools → <strong>Elements</strong>, find
-        <code>&lt;div id="squished-text"&gt;</code>. In <strong>Styles</strong>,
-        find <code>line-height: 0.6</code>.<br /><br />
-        <strong>Step 2:</strong> Try changing the value live in DevTools — the
-        text should start to breathe. The answer field unlocks automatically
-        when the spacing is fixed.<br /><br />
-        <strong>Step 3:</strong> WCAG recommends a minimum of 1.5 for body text.
-        Enter the value you used, using a period for the decimal point.
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Start by inspecting the key element in this
+          task and look for the one property or attribute that is causing the
+          bug.
+        </p>
+
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            <strong>Step 1:</strong> In DevTools → <strong>Elements</strong>,
+            find <code>&lt;div id="squished-text"&gt;</code>. In
+            <strong>Styles</strong>, find
+            <code>line-height: 0.4</code>.<br /><br />
+            <strong>Step 2:</strong> Try changing the value live in DevTools —
+            the text should start to breathe. The answer field unlocks
+            automatically when the spacing is fixed.<br /><br />
+            <strong>Step 3:</strong> WCAG recommends a minimum of 1.5 for body
+            text. Enter the value you used, using a period for the decimal
+            point.
+          </div>
+        </details>
       </div>
 
       <form class="answer-row" onsubmit="checkLineHeight(event)">
@@ -102,7 +120,7 @@
           type="text"
           class="answer-input"
           id="lh-input"
-          placeholder="e.g. 1.2"
+          placeholder="Enter the line height value, e.g. 1.2"
           autocomplete="off"
           spellcheck="false"
           disabled
@@ -114,17 +132,19 @@
 
     <script src="../game.js"></script>
     <script>
-      renderProgress(9, 14);
+      renderProgress(6, 14);
 
       function checkLineHeightFixed() {
         const el = document.getElementById("squished-text");
-        const lh = parseFloat(getComputedStyle(el).lineHeight);
-        const fs = parseFloat(getComputedStyle(el).fontSize);
+        const styles = getComputedStyle(el);
+        const rawLineHeight = styles.lineHeight;
+        const lh = parseFloat(rawLineHeight);
+        const fs = parseFloat(styles.fontSize);
         const ratio = lh / fs;
 
         const input = document.querySelector(".answer-input");
         const btn = document.querySelector(".btn-submit");
-        const unlocked = ratio >= 1.5;
+        const unlocked = rawLineHeight === "normal" || ratio >= 1.5;
 
         input.disabled = !unlocked;
         btn.disabled = !unlocked;
@@ -144,7 +164,7 @@
           return;
         }
 
-        if (val === 0.6) {
+        if (val === 0.4) {
           fb.textContent = "✗ That's the broken value.";
           fb.className = "feedback err";
           return;
@@ -161,7 +181,7 @@
         document.getElementById("lh-input").disabled = true;
         document.querySelector(".btn-submit").disabled = true;
         setTimeout(() => {
-          window.location = "task-10.html";
+          window.location = "07-click-blocking-overlay.html";
         }, 1400);
       }
     </script>

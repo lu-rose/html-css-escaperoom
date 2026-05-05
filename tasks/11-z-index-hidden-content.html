@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bug Report 13 — Content Hidden Behind Other Elements</title>
+    <title>Bug Report 11 — Content Hidden Behind Other Elements</title>
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container">
-      <a href="task-12.html" class="back-link">← Back</a>
+      <a href="10-tiny-unreadable-text.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 13 / 14</div>
+      <div class="bug-label">Bug Report 11 / 14</div>
       <h1>Content Hidden Behind Other Elements</h1>
 
       <div class="ticket">
@@ -98,24 +98,35 @@
       >
         <p style="font-size:13px;color:#16a34a;font-weight:600;margin-bottom:10px">&#10003; Correct layer is now on top!</p>
         <a
-          href="task-14.html"
+          href="12-distracting-animation.html"
           style="display:inline-block;background:#5865f5;color:#fff;font-family:-apple-system,sans-serif;font-size:13px;font-weight:600;padding:10px 22px;border-radius:6px;text-decoration:none"
         >Next bug report &rarr;</a>
       </div>
 
       <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
       <div class="hint-box" id="hint">
-        In the <strong>Elements</strong> panel, find <code>#layer-3</code> — the
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Start by inspecting the key element in this task and look for the one property or attribute that is causing the bug.
+        </p>
+
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            In the <strong>Elements</strong> panel, find <code>#layer-3</code> — the
         top element showing "LOADING...". In <strong>Styles</strong>, change its
         <code>z-index</code> from <code>10</code> to <code>0</code> or
         <code>1</code>. This slides it behind the other layers. When the correct
         message is on top, a button will appear automatically.
+          </div>
+        </details>
       </div>
     </div>
 
     <script src="../game.js"></script>
     <script>
-      renderProgress(13, 14);
+      renderProgress(11, 14);
 
       function checkZIndex() {
         const z2 = parseInt(getComputedStyle(document.getElementById('layer-2')).zIndex) || 0;
