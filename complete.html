@@ -103,6 +103,13 @@
         letter-spacing: 0.5px;
         display: block;
       }
+      .why-matters {
+        display: block;
+        margin-top: 2px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
 
       .btn-replay {
         display: inline-block;
@@ -176,6 +183,10 @@
           <div>
             <span class="resolved-label">Bug 01</span> Added meaningful alt text
             so screen readers can describe the product image
+            <span class="why-matters"
+              >Why this matters: Without alt text, users relying on assistive
+              tech miss key information.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -183,6 +194,10 @@
           <div>
             <span class="resolved-label">Bug 02</span> Found a hidden HTML comment
             with the missing clue
+            <span class="why-matters"
+              >Why this matters: Secrets in comments can leak internal context
+              and become security debt.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -190,6 +205,10 @@
           <div>
             <span class="resolved-label">Bug 03</span> Fixed invisible button text
             by choosing a WCAG AA compliant color
+            <span class="why-matters"
+              >Why this matters: Poor contrast makes actions unreadable and
+              blocks users with low vision.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -197,6 +216,10 @@
           <div>
             <span class="resolved-label">Bug 04</span> Located content pushed
             off-screen with negative positioning
+            <span class="why-matters"
+              >Why this matters: Hidden content causes false bug reports and
+              broken user journeys.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -204,6 +227,10 @@
           <div>
             <span class="resolved-label">Bug 05</span> Corrected layout flow by
             fixing flex item order
+            <span class="why-matters"
+              >Why this matters: Visual order affects comprehension and can
+              conflict with reading expectations.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -211,6 +238,10 @@
           <div>
             <span class="resolved-label">Bug 06</span> Improved readability by
             setting a WCAG-compliant line-height
+            <span class="why-matters"
+              >Why this matters: Tight line spacing increases cognitive load and
+              slows reading accuracy.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -218,6 +249,10 @@
           <div>
             <span class="resolved-label">Bug 07</span> Removed a transparent
             overlay that blocked all clicks
+            <span class="why-matters"
+              >Why this matters: Invisible blockers create dead UI and are hard
+              to debug without inspection.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -225,6 +260,10 @@
           <div>
             <span class="resolved-label">Bug 08</span> Identified a hard-coded
             swatch color that bypassed the design system
+            <span class="why-matters"
+              >Why this matters: Hardcoded values drift from tokens and make
+              consistent theming harder.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -232,6 +271,10 @@
           <div>
             <span class="resolved-label">Bug 09</span> Found the feature flag set
             to OFF in production
+            <span class="why-matters"
+              >Why this matters: Misconfigured flags can silently disable
+              shipped functionality.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -239,6 +282,10 @@
           <div>
             <span class="resolved-label">Bug 10</span> Made near-invisible tiny
             text readable again
+            <span class="why-matters"
+              >Why this matters: Tiny text harms readability and can hide
+              critical business information.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -246,6 +293,10 @@
           <div>
             <span class="resolved-label">Bug 11</span> Adjusted z-index so the
             important status message appears on top
+            <span class="why-matters"
+              >Why this matters: Layering bugs hide priority content behind less
+              important elements.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -253,6 +304,10 @@
           <div>
             <span class="resolved-label">Bug 12</span> Paused a runaway animation
             to reveal the hidden text
+            <span class="why-matters"
+              >Why this matters: Motion can reduce readability and overwhelm
+              users with vestibular sensitivities.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -260,6 +315,10 @@
           <div>
             <span class="resolved-label">Bug 13</span> Replaced a hardcoded value
             with the correct design token
+            <span class="why-matters"
+              >Why this matters: Token usage keeps UI consistent and enables
+              scalable design changes.</span
+            >
           </div>
         </div>
         <div class="resolved-item">
@@ -267,6 +326,10 @@
           <div>
             <span class="resolved-label">Bug 14</span> Unlocked the final release
             action and deployed to production
+            <span class="why-matters"
+              >Why this matters: A single disabled control can block releases
+              and delay customer value.</span
+            >
           </div>
         </div>
       </div>
