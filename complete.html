@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Session Complete</title>
+  <title>Session Complete — Prod is back up</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body { align-items: center; text-align: center; }
@@ -55,7 +55,7 @@
       margin-bottom: 2.5rem;
       text-align: left;
       display: inline-block;
-      min-width: 320px;
+      min-width: 340px;
     }
 
     .resolved-list-title {
@@ -124,15 +124,18 @@
   <canvas id="confetti-canvas"></canvas>
 
   <div class="container">
-    <div class="status-pill">All 10 bugs resolved</div>
+    <div class="status-pill">Prod is back up</div>
 
-    <div class="granted-no">Tilgang innvilget</div>
-    <div class="granted-en">Access granted</div>
+    <h1 style="font-size:36px;font-weight:800;letter-spacing:-0.5px;margin-bottom:0.5rem;animation:pulse-scale 2s ease-in-out infinite">
+      You made it! 🎉
+    </h1>
+    <p style="font-size:15px;color:var(--muted);margin-bottom:0.75rem">All 14 bugs resolved.</p>
+    <p id="time-used" style="font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:var(--accent);margin-bottom:3rem;letter-spacing:1px"></p>
 
     <p class="victory-msg">
-      You worked through every bug report — inspecting, adjusting,<br>
-      and understanding what developers deal with every day.<br><br>
-      <strong>That is what collaboration between design and development looks like.</strong>
+      You worked through every bug report as a team — developer, designer,<br>
+      product owner, and QA all contributed something the others couldn't.<br><br>
+      <strong>That is what real cross-functional collaboration looks like.</strong>
     </p>
 
     <div class="resolved-list">
@@ -143,44 +146,76 @@
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 02</span> Discovered a transparent overlay blocking clicks</div>
+        <div><span class="resolved-label">Bug 02</span> Discussed and wrote meaningful alt text for a product image</div>
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 03</span> Read a developer note left in an HTML comment</div>
+        <div><span class="resolved-label">Bug 03</span> Discovered a transparent overlay blocking all clicks</div>
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 04</span> Identified a hard-coded color that bypassed the design system</div>
+        <div><span class="resolved-label">Bug 04</span> Identified a feature flag set to OFF after launch</div>
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 05</span> Located content pushed off-screen with a negative position</div>
+        <div><span class="resolved-label">Bug 05</span> Read a developer note left in an HTML comment</div>
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 06</span> Fixed a broken flexbox layout by correcting item order</div>
+        <div><span class="resolved-label">Bug 06</span> Identified a hard-coded color that bypassed the design system</div>
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 07</span> Made 1px invisible text readable again</div>
+        <div><span class="resolved-label">Bug 07</span> Fixed invisible button text by choosing a WCAG AA compliant color</div>
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 08</span> Adjusted z-index to surface a hidden status message</div>
+        <div><span class="resolved-label">Bug 08</span> Located content pushed off-screen with a negative position</div>
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 09</span> Paused a runaway animation to read its content</div>
+        <div><span class="resolved-label">Bug 09</span> Fixed a broken flexbox layout by correcting item order</div>
       </div>
       <div class="resolved-item">
         <span class="check">&#10003;</span>
-        <div><span class="resolved-label">Bug 10</span> Removed a stray disabled attribute to unlock the feature</div>
+        <div><span class="resolved-label">Bug 10</span> Fixed overlapping text by setting a WCAG-compliant line-height</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 11</span> Made 0.5px invisible text readable again</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 12</span> Removed a stray disabled attribute to unlock the feature</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 13</span> Adjusted z-index to surface a hidden status message</div>
+      </div>
+      <div class="resolved-item">
+        <span class="check">&#10003;</span>
+        <div><span class="resolved-label">Bug 14</span> Paused a runaway animation to read its content</div>
       </div>
     </div>
 
     <a href="index.html" class="btn-replay">Play again</a>
   </div>
+
+  <script>
+    /* Show elapsed time */
+    (function () {
+      const start = sessionStorage.getItem('escapeRoomStart_2026');
+      const el    = document.getElementById('time-used');
+      if (!start || !el) return;
+      const secs = Math.floor((Date.now() - parseInt(start, 10)) / 1000);
+      const m    = Math.floor(secs / 60);
+      const s    = secs % 60;
+      const pad  = n => String(n).padStart(2, '0');
+      el.textContent = 'Time used: ' + pad(m) + ':' + pad(s);
+      /* clear so a replay starts fresh */
+      sessionStorage.removeItem('escapeRoomStart_2026');
+    })();
+  </script>
 
   <script>
     const canvas = document.getElementById('confetti-canvas');

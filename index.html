@@ -3,66 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fagdag 08.05.2026</title>
+  <title>Fagdag 08.05.2026 — Prod is down</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body { align-items: center; }
 
-    .badge {
-      display: inline-block;
+    /* ── Inline alert strip ────────────────────────── */
+    .alert-strip {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      border-radius: 8px;
+      padding: 10px 16px;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 4px 14px;
-      border-radius: 20px;
+      color: #dc2626;
+      text-align: center;
       margin-bottom: 1.5rem;
+      animation: blink-bar 1.4s ease-in-out infinite;
+    }
+    @keyframes blink-bar {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.55; }
     }
 
-    .workshop-title {
-      font-size: 38px;
+    /* ── Incident badge ────────────────────────────── */
+    .incident-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #dc2626;
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #dc2626;
+      animation: pulse-dot 1.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.5); opacity: 0.6; }
+    }
+
+    /* ── Headings ──────────────────────────────────── */
+    .incident-title {
+      font-size: 32px;
       font-weight: 800;
       letter-spacing: -0.5px;
       line-height: 1.2;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
+      color: var(--text);
     }
-
-    .workshop-sub {
-      font-size: 16px;
+    .incident-sub {
+      font-size: 14px;
       color: var(--muted);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       font-weight: 400;
     }
 
-    .intro-text {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.85;
-      margin-bottom: 2.5rem;
+    /* ── Fake log ──────────────────────────────────── */
+    .log-box {
+      background: #fafbff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 2;
     }
+    .log-line { display: flex; gap: 10px; align-items: baseline; }
+    .log-time { color: #b0b5d0; white-space: nowrap; flex-shrink: 0; }
+    .log-ok   { color: #16a34a; font-weight: 600; }
+    .log-warn { color: #d97706; font-weight: 600; }
+    .log-err  { color: #dc2626; font-weight: 600; }
+    .log-msg  { color: #4b4f72; }
 
-    /* Role cards */
+    /* ── Mission box ───────────────────────────────── */
+    .mission-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .mission-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .mission-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .mission-text strong { color: var(--accent); }
+
+    /* ── Role cards ────────────────────────────────── */
     .roles {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
-
     .role-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 1rem 1.25rem;
     }
-
-    .role-card.highlight {
-      border-color: var(--accent);
-      background: var(--accent-light);
-    }
-
     .role-tag {
       display: block;
       font-size: 10px;
@@ -72,62 +137,56 @@
       color: var(--muted);
       margin-bottom: 5px;
     }
-
-    .role-card.highlight .role-tag {
-      color: var(--accent);
-    }
-
     .role-name {
       font-size: 14px;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 4px;
     }
-
     .role-desc {
       font-size: 12px;
       color: var(--muted);
       line-height: 1.55;
     }
 
-    /* Mission box */
-    .mission-box {
+    /* ── Static timer ──────────────────────────────── */
+    .timer-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 1.5rem;
+      padding: 1rem 1.5rem;
       margin-bottom: 2rem;
     }
-
-    .mission-label {
+    .timer-label {
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--muted);
-      margin-bottom: 10px;
+    }
+    .timer-static {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: #16a34a;
     }
 
-    .mission-text {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.85;
-    }
-
-    .mission-text strong {
-      color: var(--accent);
-    }
-
+    /* ── CTA ───────────────────────────────────────── */
     .btn-start {
       display: inline-block;
       background: var(--accent);
       color: #ffffff;
       font-family: var(--sans);
       font-size: 14px;
-      font-weight: 600;
-      padding: 13px 32px;
+      font-weight: 700;
+      padding: 14px 32px;
       border-radius: 8px;
-      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.3px;
       transition: opacity 0.2s;
     }
     .btn-start:hover { opacity: 0.88; }
@@ -143,46 +202,82 @@
 </head>
 <body>
   <div class="container">
-    <div class="badge">Fagdag 08.05.2026</div>
-    <h1 class="workshop-title">POV: You are a developer</h1>
-    <p class="workshop-sub">Understanding roles and debugging together</p>
+
+    <div class="alert-strip">⚠ SEVERITY 1 INCIDENT — ALL HANDS ON DECK</div>
+
+    <div class="incident-badge">
+      <span class="pulse-dot"></span>
+      INCIDENT-2026-0508 · ACTIVE
+    </div>
+
+    <h1 class="incident-title">POV: Prod is down.<br>You have 45 minutes.</h1>
+    <p class="incident-sub">QA has filed 14 bug reports. Every role is needed.</p>
+
+    <div class="log-box">
+      <div class="log-line"><span class="log-time">09:14:02</span><span class="log-ok">[OK]</span>    <span class="log-msg">Deployment pipeline triggered — v2.4.1</span></div>
+      <div class="log-line"><span class="log-time">09:14:18</span><span class="log-ok">[OK]</span>    <span class="log-msg">Build passed — 142 modules compiled</span></div>
+      <div class="log-line"><span class="log-time">09:14:31</span><span class="log-warn">[WARN]</span>  <span class="log-msg">Feature flag service — response slow (1840ms)</span></div>
+      <div class="log-line"><span class="log-time">09:14:44</span><span class="log-err">[ERROR]</span> <span class="log-msg">Health check failed — prod-web-01 unreachable</span></div>
+      <div class="log-line"><span class="log-time">09:14:44</span><span class="log-err">[ERROR]</span> <span class="log-msg">Rollback failed — no previous stable build found</span></div>
+      <div class="log-line"><span class="log-time">09:14:45</span><span class="log-err">[FATAL]</span> <span class="log-msg">Production is down. Incident declared.</span></div>
+    </div>
 
     <div class="mission-box">
-      <div class="mission-label">Your mission</div>
+      <div class="mission-label">Mission briefing</div>
       <p class="mission-text">
-        QA has filed <strong>10 bug reports</strong>. The developer is in back-to-back meetings.
-        Using only your browser's DevTools, investigate each issue — find what is wrong and enter the code to move on to the next one.
+        QA has filed <strong>14 bug reports</strong>. The developer is in back-to-back meetings.
+        Using only your browser's DevTools, your whole team must investigate each issue —
+        find what is wrong and enter the answer to move on.
+        <br><br>
+        This is not a solo developer task. <strong>Designers</strong> spot visual inconsistencies.
+        <strong>Product Owners</strong> identify what was supposed to ship.
+        <strong>Developers</strong> dig into the code. Work together.
       </p>
     </div>
 
     <div class="roles">
       <div class="role-card">
         <span class="role-tag">Role</span>
-        <div class="role-name">Product Owner</div>
-        <div class="role-desc">Defines priorities. Owns the backlog. Bridges business and team.</div>
+        <div class="role-name">Developer</div>
+        <div class="role-desc">Reads the code. Navigates DevTools. Finds the hidden values.</div>
       </div>
       <div class="role-card">
         <span class="role-tag">Role</span>
         <div class="role-name">Designer</div>
-        <div class="role-desc">Shapes the experience. Creates the visual language. Advocates for users.</div>
+        <div class="role-desc">Spots what looks wrong. Knows WCAG. Advocates for the user.</div>
       </div>
-      <div class="role-card highlight">
-        <span class="role-tag">Today's focus</span>
-        <div class="role-name">Developer</div>
-        <div class="role-desc">Builds the product. Turns designs into code. Navigates real-world constraints.</div>
+      <div class="role-card">
+        <span class="role-tag">Role</span>
+        <div class="role-name">Product Owner</div>
+        <div class="role-desc">Knows what was supposed to launch. Owns the backlog. Bridges the team.</div>
       </div>
       <div class="role-card">
         <span class="role-tag">Role</span>
         <div class="role-name">QA / Tester</div>
-        <div class="role-desc">Ensures quality. Finds the bugs. Thinks in edge cases.</div>
+        <div class="role-desc">Filed the reports. Thinks in edge cases. Ensures nothing slips through.</div>
       </div>
     </div>
 
-    <a href="task-1.html" class="btn-start">Start debugging</a>
+    <div class="timer-wrap">
+      <span class="timer-label">Time limit</span>
+      <span class="timer-static">45:00</span>
+    </div>
+
+    <button class="btn-start" onclick="startGame()">⚡ START DEBUGGING — FIX PROD</button>
 
     <div class="how-to">
-      Open DevTools &rarr; <strong>F12</strong> or <strong>Cmd + Option + I</strong><br>
+      Open DevTools &rarr; <strong>F12</strong> or <strong>Cmd + Option + I</strong>
     </div>
   </div>
+
+  <script>
+    /* Clear any previous run so the timer is fresh on revisit */
+    sessionStorage.removeItem('escapeRoomStart_2026');
+
+    function startGame() {
+      sessionStorage.setItem('escapeRoomStart_2026', Date.now().toString());
+      window.location = 'task-1.html';
+    }
+  </script>
 </body>
 </html>
