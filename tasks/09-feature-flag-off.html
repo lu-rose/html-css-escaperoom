@@ -239,7 +239,9 @@
       </button>
       <div class="hint-box" id="hint">
         <p style="margin-bottom: 0">
-          <strong>Level 1:</strong> Start by inspecting the key element in this task and look for the one property or attribute that is causing the bug.
+          <strong>Level 1:</strong> Start by inspecting the key element in this
+          task and look for the one property or attribute that is causing the
+          bug.
         </p>
 
         <details style="margin-top: 10px">
@@ -247,20 +249,27 @@
             Still stuck? Show Level 2
           </summary>
           <div style="margin-top: 10px">
-            <strong>Hint 1:</strong> Look at the user story cards — which one was
-        launched last sprint but is not working?<br /><br />
-        <strong>Hint 2:</strong> In the <strong>Elements</strong> panel, find
-        the launched story card. Look at its <code>data-</code> attributes — you
-        will find the flag name there.<br /><br />
-        <strong>Hint 3:</strong> Match the flag name to the feature flag panel.
-        That is the flag set to <code>OFF</code> by mistake.
+            <strong>Hint 1:</strong> Look at the user story cards — which one
+            was launched last sprint but is not working?<br /><br />
+            <strong>Hint 2:</strong> In the <strong>Elements</strong> panel,
+            find the launched story card. Look at its
+            <code>data-</code> attributes — you will find the flag name
+            there.<br /><br />
+            <strong>Hint 3:</strong> Match the flag name to the feature flag
+            panel. That is the flag set to <code>OFF</code> by mistake.
           </div>
         </details>
       </div>
 
       <form
         class="answer-row"
-        onsubmit="checkAnswer(event, 'ZXhwcmVzc19jaGVja291dA==', '10-tiny-unreadable-text.html')"
+        onsubmit="
+          checkAnswer(
+            event,
+            'ZXhwcmVzc19jaGVja291dA==',
+            '10-tiny-unreadable-text.html',
+          )
+        "
       >
         <input
           type="text"

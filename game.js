@@ -29,7 +29,7 @@ function checkAnswer(e, enc, next) {
   const fb = document.getElementById("feedback");
   const expected = answer.trim().toUpperCase();
   const isHexAnswer = /^#?[0-9A-F]{3}([0-9A-F]{3})?([0-9A-F]{2})?$/.test(
-    expected
+    expected,
   );
   const normalizedVal = isHexAnswer ? val.replace(/^#/, "") : val;
   const normalizedExpected = isHexAnswer

@@ -196,7 +196,9 @@
       </button>
       <div class="hint-box" id="hint">
         <p style="margin-bottom: 0">
-          <strong>Level 1:</strong> Start by inspecting the key element in this task and look for the one property or attribute that is causing the bug.
+          <strong>Level 1:</strong> Start by inspecting the key element in this
+          task and look for the one property or attribute that is causing the
+          bug.
         </p>
 
         <details style="margin-top: 10px">
@@ -205,21 +207,27 @@
           </summary>
           <div style="margin-top: 10px">
             <strong>Step 1:</strong> Select the red component in the
-        <strong>Elements</strong> panel. In <strong>Styles</strong>, find its
-        inline <code>background-color</code> — note the hex value.<br /><br />
-        <strong>Step 2:</strong> In the Elements panel, click on
-        <code>&lt;html&gt;</code> or <code>&lt;head&gt;</code> and look for the
-        <code>:root</code> rule in Styles. Find the CSS variable whose value
-        matches the hex you found.<br /><br />
-        <strong>Answer format:</strong> enter the token name, e.g.
-        <code>--color-primary</code>.
+            <strong>Elements</strong> panel. In <strong>Styles</strong>, find
+            its inline <code>background-color</code> — note the hex value.<br /><br />
+            <strong>Step 2:</strong> In the Elements panel, click on
+            <code>&lt;html&gt;</code> or <code>&lt;head&gt;</code> and look for
+            the <code>:root</code> rule in Styles. Find the CSS variable whose
+            value matches the hex you found.<br /><br />
+            <strong>Answer format:</strong> enter the token name, e.g.
+            <code>--color-primary</code>.
           </div>
         </details>
       </div>
 
       <form
         class="answer-row"
-        onsubmit="checkAnswer(event, 'LS1jb2xvci1kYW5nZXIx', '14-final-deploy-gate.html')"
+        onsubmit="
+          checkAnswer(
+            event,
+            'LS1jb2xvci1kYW5nZXIx',
+            '14-final-deploy-gate.html',
+          )
+        "
       >
         <input
           type="text"
