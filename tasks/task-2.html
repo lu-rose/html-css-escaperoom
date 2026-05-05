@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Bug Report 02 — The screen readers cannot see the product image
+    </title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <a href="task-1.html" class="back-link">← Back</a>
+      <div id="progress" class="progress"></div>
+
+      <div class="bug-label">Bug Report 02 / 14</div>
+      <h1>The screen readers cannot see the product image</h1>
+
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: QA</span>
+          <span>&middot;</span>
+          <span>Accessibility</span>
+          <span>&middot;</span>
+          <span>Screen reader broken</span>
+        </div>
+        <p class="ticket-desc">
+          The product card below has an image with an empty
+          <code
+            style="
+              font-family: &quot;Courier New&quot;, monospace;
+              font-size: 12px;
+              background: #f0f2ff;
+              padding: 1px 5px;
+              border-radius: 3px;
+              color: #5865f5;
+            "
+            >alt</code
+          >
+          attribute. Screen readers skip it entirely — visually impaired users
+          have no idea what the product looks like. Inspect the image in
+          DevTools, then discuss as a team: what should the alt text say? Enter
+          a description of what you see in the image.
+        </p>
+      </div>
+
+      <div class="puzzle">
+        <p
+          style="
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #b0b5d0;
+            margin-bottom: 14px;
+          "
+        >
+          Product card — inspect this
+        </p>
+
+        <div
+          style="
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+          "
+        >
+          <!-- Product card -->
+          <div
+            style="
+              background: #fff;
+              border: 1px solid #dde1f5;
+              border-radius: 10px;
+              overflow: hidden;
+              width: 200px;
+              flex-shrink: 0;
+            "
+          >
+            <img
+              id="product-img"
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80"
+              alt=""
+              style="
+                width: 100%;
+                height: 140px;
+                object-fit: cover;
+                display: block;
+              "
+            />
+            <div style="padding: 12px 14px">
+              <div
+                style="
+                  font-size: 13px;
+                  font-weight: 700;
+                  color: #1c1f3d;
+                  margin-bottom: 4px;
+                "
+              >
+                Minimalist Watch
+              </div>
+              <div style="font-size: 13px; color: #5865f5; font-weight: 600">
+                kr 1 299
+              </div>
+            </div>
+          </div>
+
+          <!-- Explanation -->
+          <div style="flex: 1; min-width: 200px">
+            <p
+              style="
+                font-size: 12px;
+                color: #b0b5d0;
+                line-height: 1.8;
+                margin-bottom: 12px;
+              "
+            >
+              Inspect the
+              <code
+                style="
+                  font-family: &quot;Courier New&quot;, monospace;
+                  font-size: 11px;
+                  background: #f0f2ff;
+                  padding: 1px 4px;
+                  border-radius: 3px;
+                  color: #5865f5;
+                "
+                >&lt;img&gt;</code
+              >
+              tag in the <strong>Elements</strong> panel. You will find
+              <code
+                style="
+                  font-family: &quot;Courier New&quot;, monospace;
+                  font-size: 11px;
+                  background: #f0f2ff;
+                  padding: 1px 4px;
+                  border-radius: 3px;
+                  color: #5865f5;
+                "
+                >alt=""</code
+              >
+              — it is empty.
+            </p>
+            <p style="font-size: 12px; color: #b0b5d0; line-height: 1.8">
+              Discuss as a team: what should a screen reader announce when it
+              reaches this image? Enter any reasonable description of what you
+              see.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
+      <div class="hint-box" id="hint">
+        <strong>Step 1:</strong> Open DevTools →
+        <strong>Elements</strong> panel. Find the
+        <code>&lt;img id="product-img"&gt;</code> tag and look at its
+        <code>alt</code> attribute — it is empty (<code>alt=""</code>).<br /><br />
+        <strong>Step 2:</strong> Look at the image. What do you see? Discuss as
+        a team what a screen reader user should hear when they land on this
+        card.<br /><br />
+        <strong>Step 3:</strong> Write a short description. Any answer that
+        describes what is in the image is accepted — the goal is the
+        conversation about what <em>good</em> alt text looks like.
+      </div>
+
+      <form class="answer-row" onsubmit="checkAltAnswer(event)">
+        <input
+          type="text"
+          class="answer-input"
+          id="alt-input"
+          placeholder="Describe what you see in the image..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+      <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script src="../game.js"></script>
+    <script>
+      renderProgress(2, 14);
+
+      function checkAltAnswer(e) {
+        e.preventDefault();
+        const val = document
+          .getElementById("alt-input")
+          .value.trim()
+          .toLowerCase();
+        const fb = document.getElementById("feedback");
+
+        if (val.length < 3) {
+          fb.textContent = "✗ Please write an actual description.";
+          fb.className = "feedback err";
+          return;
+        }
+
+        const keywords = [
+          "watch",
+          "klokke",
+          "timepiece",
+          "ur",
+          "minimalist",
+          "product",
+          "hvit",
+          "image",
+          "picture",
+          "bilde",
+        ];
+        const accepted = keywords.some((k) => val.includes(k));
+
+        if (accepted) {
+          fb.textContent =
+            "✓ Good description — moving to the next bug report...";
+          fb.className = "feedback ok";
+          document.getElementById("alt-input").disabled = true;
+          document.querySelector(".btn-submit").disabled = true;
+          setTimeout(() => {
+            window.location = "task-3.html";
+          }, 1400);
+        } else {
+          fb.textContent =
+            "✗ Look at the image — what object do you see? Describe it.";
+          fb.className = "feedback err";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bug Report 11 — Text Is Hard to Read</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container">
@@ -24,8 +24,8 @@
         <p class="ticket-desc">
           Users are struggling to read a piece of important information on this
           page. The text exists in the DOM, but something about its styling
-          makes it nearly impossible to see. Fix it in DevTools to unlock the
-          answer field, then enter what it says.
+          makes it nearly impossible to see. Fix it to unlock the answer field,
+          then enter what it says.
         </p>
       </div>
 
@@ -59,13 +59,15 @@
         </p>
       </div>
 
-      <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
       <div class="hint-box" id="hint">
         In the <strong>Elements</strong> panel, find
         <code>&lt;span id="tiny-text"&gt;</code>. In the
         <strong>Styles</strong> pane, find <code>font-size</code> and change it
-        from <code>0.5px</code> to something like <code>32px</code>. Read what
-        the text says — that is your answer.
+        from <code>0.5px</code> to something larger. Read what the text says —
+        that is your answer.
       </div>
 
       <form
@@ -85,21 +87,21 @@
       <div class="feedback" id="feedback"></div>
     </div>
 
-    <script src="game.js"></script>
+    <script src="../game.js"></script>
     <script>
       renderProgress(11, 14);
 
       function checkFontSize() {
-        const el      = document.getElementById('tiny-text');
-        const fs      = parseFloat(getComputedStyle(el).fontSize);
-        const fixed   = fs > 1;
-        const input   = document.querySelector('.answer-input');
-        const btn     = document.querySelector('.btn-submit');
+        const el = document.getElementById("tiny-text");
+        const fs = parseFloat(getComputedStyle(el).fontSize);
+        const fixed = fs > 1;
+        const input = document.querySelector(".answer-input");
+        const btn = document.querySelector(".btn-submit");
         input.disabled = !fixed;
-        btn.disabled   = !fixed;
+        btn.disabled = !fixed;
         if (fixed && !input.dataset.focused) {
           input.focus();
-          input.dataset.focused = '1';
+          input.dataset.focused = "1";
         }
       }
 

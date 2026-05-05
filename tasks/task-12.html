@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bug Report 14 — Distracting Animation</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Bug Report 12 — Distracting Animation</title>
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container">
-      <a href="task-13.html" class="back-link">← Back</a>
+      <a href="task-11.html" class="back-link">← Back</a>
       <div id="progress" class="progress"></div>
 
-      <div class="bug-label">Bug Report 14 / 14</div>
+      <div class="bug-label">Bug Report 12 / 14</div>
       <h1>Distracting Animation</h1>
 
       <div class="ticket">
@@ -54,11 +54,16 @@
         </span>
       </div>
 
-      <p id="lock-msg" style="font-size:12px;color:#b0b5d0;margin-bottom:1rem">
+      <p
+        id="lock-msg"
+        style="font-size: 12px; color: #b0b5d0; margin-bottom: 1rem"
+      >
         Pause the animation first — then the answer field will unlock.
       </p>
 
-      <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
       <div class="hint-box" id="hint">
         In the <strong>Elements</strong> panel, select <code>#spinning</code>.
         In the <strong>Styles</strong> pane, click the area where you can add a
@@ -70,7 +75,7 @@
 
       <form
         class="answer-row"
-        onsubmit="checkAnswer(event, 'UkVGQUNUT1I=', 'complete.html')"
+        onsubmit="checkAnswer(event, 'UkVGQUNUT1I=', 'task-13.html')"
       >
         <input
           type="text"
@@ -85,29 +90,29 @@
       <div class="feedback" id="feedback"></div>
     </div>
 
-    <script src="game.js"></script>
+    <script src="../game.js"></script>
     <script>
-      renderProgress(14, 14);
+      renderProgress(12, 14);
 
       function checkPaused() {
-        const el  = document.getElementById('spinning');
-        const cs  = getComputedStyle(el);
+        const el = document.getElementById("spinning");
+        const cs = getComputedStyle(el);
         const stopped =
-          cs.animationPlayState === 'paused' ||
-          cs.animationName === 'none' ||
+          cs.animationPlayState === "paused" ||
+          cs.animationName === "none" ||
           parseFloat(cs.animationDuration) === 0;
 
-        const input = document.querySelector('.answer-input');
-        const btn   = document.querySelector('.btn-submit');
-        const msg   = document.getElementById('lock-msg');
+        const input = document.querySelector(".answer-input");
+        const btn = document.querySelector(".btn-submit");
+        const msg = document.getElementById("lock-msg");
 
         input.disabled = !stopped;
-        btn.disabled   = !stopped;
-        msg.style.display = stopped ? 'none' : 'block';
+        btn.disabled = !stopped;
+        msg.style.display = stopped ? "none" : "block";
 
         if (stopped && !input.dataset.focused) {
           input.focus();
-          input.dataset.focused = '1';
+          input.dataset.focused = "1";
         }
       }
 

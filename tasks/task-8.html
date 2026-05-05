@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bug Report 08 — Content Missing from Screen</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container">
@@ -87,7 +87,14 @@
           border-radius: 8px;
         "
       >
-        <p style="font-size: 13px; color: #16a34a; font-weight: 600; margin-bottom: 10px;">
+        <p
+          style="
+            font-size: 13px;
+            color: #16a34a;
+            font-weight: 600;
+            margin-bottom: 10px;
+          "
+        >
           &#10003; Content is back in view!
         </p>
         <a
@@ -103,39 +110,42 @@
             border-radius: 6px;
             text-decoration: none;
           "
-        >Next bug report &rarr;</a>
+          >Next bug report &rarr;</a
+        >
       </div>
 
-      <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
       <div class="hint-box" id="hint">
         In the <strong>Elements</strong> panel, look inside the puzzle box for
         <code>&lt;div id="missing-content"&gt;</code>. It has
         <code>left: -9999px</code> — a common technique that pushes an element
         far off screen to the left.<br /><br />
-        In the <strong>Styles</strong> pane, change <code>left</code>. The
-        element will appear inside the box and the next button will show up
-        automatically.
+        In the <strong>Styles</strong> pane, change <code>left</code>.
       </div>
     </div>
 
-    <script src="game.js"></script>
+    <script src="../game.js"></script>
     <script>
       renderProgress(8, 14);
 
       function checkVisible() {
-        const el        = document.getElementById('missing-content');
-        const container = document.getElementById('puzzle-area');
-        const elRect    = el.getBoundingClientRect();
-        const cRect     = container.getBoundingClientRect();
+        const el = document.getElementById("missing-content");
+        const container = document.getElementById("puzzle-area");
+        const elRect = el.getBoundingClientRect();
+        const cRect = container.getBoundingClientRect();
 
         const inside =
-          elRect.left   >= cRect.left &&
-          elRect.right  <= cRect.right &&
-          elRect.top    >= cRect.top - 10 &&
+          elRect.left >= cRect.left &&
+          elRect.right <= cRect.right &&
+          elRect.top >= cRect.top - 10 &&
           elRect.bottom <= cRect.bottom + 10 &&
-          elRect.width  > 0;
+          elRect.width > 0;
 
-        document.getElementById('next-btn').style.display = inside ? 'block' : 'none';
+        document.getElementById("next-btn").style.display = inside
+          ? "block"
+          : "none";
       }
 
       setInterval(checkVisible, 400);

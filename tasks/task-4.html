@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bug Report 04 — Launched feature is invisible to users</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
     <style>
       .story-card {
         background: var(--surface);
@@ -28,7 +28,10 @@
         color: var(--muted);
         margin-bottom: 4px;
       }
-      .story-title { font-weight: 600; color: var(--text); }
+      .story-title {
+        font-weight: 600;
+        color: var(--text);
+      }
       .story-status {
         display: inline-block;
         font-size: 10px;
@@ -37,11 +40,24 @@
         border-radius: 4px;
         margin-top: 6px;
       }
-      .status-done   { background: #dcfce7; color: #16a34a; }
-      .status-launch { background: #eef0fe; color: #5865f5; }
-      .status-pending{ background: #f1f5f9; color: #94a3b8; }
+      .status-done {
+        background: #dcfce7;
+        color: #16a34a;
+      }
+      .status-launch {
+        background: #eef0fe;
+        color: #5865f5;
+      }
+      .status-pending {
+        background: #f1f5f9;
+        color: #94a3b8;
+      }
 
-      .flag-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      .flag-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
       .flag-table th {
         font-size: 10px;
         font-weight: 700;
@@ -57,11 +73,29 @@
         border-bottom: 1px solid #f0f2ff;
         vertical-align: middle;
       }
-      .flag-table tr:last-child td { border-bottom: none; }
-      .flag-name { font-family: var(--mono); font-size: 12px; color: #4b4f72; }
-      .flag-on  { color: #16a34a; font-weight: 700; font-size: 12px; }
-      .flag-off { color: #dc2626; font-weight: 700; font-size: 12px; }
-      .flag-bug { background: #fee2e2; border-radius: 4px; padding: 2px 6px; }
+      .flag-table tr:last-child td {
+        border-bottom: none;
+      }
+      .flag-name {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: #4b4f72;
+      }
+      .flag-on {
+        color: #16a34a;
+        font-weight: 700;
+        font-size: 12px;
+      }
+      .flag-off {
+        color: #dc2626;
+        font-weight: 700;
+        font-size: 12px;
+      }
+      .flag-bug {
+        background: #fee2e2;
+        border-radius: 4px;
+        padding: 2px 6px;
+      }
     </style>
   </head>
   <body>
@@ -82,22 +116,47 @@
           <span>Missing feature in prod</span>
         </div>
         <p class="ticket-desc">
-          Express Checkout was launched last sprint, but users report it has disappeared.
-          A feature flag is set to <code style="font-family:'Courier New',monospace;font-size:12px;background:#fee2e2;padding:1px 5px;border-radius:3px;color:#dc2626">off</code> in prod.
-          The PO should identify which story was launched. The dev should inspect the user story card in DevTools to find the exact flag name. Enter the flag name to proceed.
+          Express Checkout was launched last sprint, but users report it has
+          disappeared. A feature flag is set to
+          <code
+            style="
+              font-family: &quot;Courier New&quot;, monospace;
+              font-size: 12px;
+              background: #fee2e2;
+              padding: 1px 5px;
+              border-radius: 3px;
+              color: #dc2626;
+            "
+            >off</code
+          >
+          in prod. Find the feature flag name. Enter the flag name to proceed.
         </p>
       </div>
 
       <div class="puzzle">
-        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-start">
-
+        <div
+          style="
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: flex-start;
+          "
+        >
           <!-- User stories -->
-          <div style="flex:1;min-width:220px">
-            <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#b0b5d0;margin-bottom:12px">
+          <div style="flex: 1; min-width: 220px">
+            <p
+              style="
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: #b0b5d0;
+                margin-bottom: 12px;
+              "
+            >
               User stories — sprint board
             </p>
-            <div style="display:flex;flex-direction:column;gap:8px">
-
+            <div style="display: flex; flex-direction: column; gap: 8px">
               <div class="story-card">
                 <div class="story-id">US-041</div>
                 <div class="story-title">Dark mode toggle</div>
@@ -110,24 +169,39 @@
                 <span class="story-status status-done">&#10003; Shipped</span>
               </div>
 
-              <div class="story-card launched" data-feature-flag="express_checkout">
+              <div
+                class="story-card launched"
+                data-feature-flag="express_checkout"
+              >
                 <div class="story-id">US-051</div>
                 <div class="story-title">Express Checkout 🚀</div>
-                <span class="story-status status-launch">Launched last sprint</span>
+                <span class="story-status status-launch"
+                  >Launched last sprint</span
+                >
               </div>
 
               <div class="story-card">
                 <div class="story-id">US-055</div>
                 <div class="story-title">Order tracking map</div>
-                <span class="story-status status-pending">Not launched yet</span>
+                <span class="story-status status-pending"
+                  >Not launched yet</span
+                >
               </div>
-
             </div>
           </div>
 
           <!-- Feature flag panel -->
-          <div style="flex:1;min-width:220px">
-            <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#b0b5d0;margin-bottom:12px">
+          <div style="flex: 1; min-width: 220px">
+            <p
+              style="
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: #b0b5d0;
+                margin-bottom: 12px;
+              "
+            >
               Feature flag panel — prod
             </p>
             <table class="flag-table">
@@ -157,15 +231,20 @@
               </tbody>
             </table>
           </div>
-
         </div>
       </div>
 
-      <button class="hint-toggle" onclick="toggleHint()">Stuck? Need help?</button>
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
       <div class="hint-box" id="hint">
-        <strong>Step 1 (PO):</strong> Look at the user story cards — which one was launched last sprint but isn't working?<br><br>
-        <strong>Step 2 (Dev):</strong> In the <strong>Elements</strong> panel, find the launched story card. Look at its <code>data-</code> attributes — you will find the flag name there.<br><br>
-        <strong>Step 3:</strong> Match the flag name to the feature flag panel. That is the flag set to <code>OFF</code> by mistake.
+        <strong>Hint 1:</strong> Look at the user story cards — which one was
+        launched last sprint but is not working?<br /><br />
+        <strong>Hint 2:</strong> In the <strong>Elements</strong> panel, find
+        the launched story card. Look at its <code>data-</code> attributes — you
+        will find the flag name there.<br /><br />
+        <strong>Hint 3:</strong> Match the flag name to the feature flag panel.
+        That is the flag set to <code>OFF</code> by mistake.
       </div>
 
       <form
@@ -184,7 +263,7 @@
       <div class="feedback" id="feedback"></div>
     </div>
 
-    <script src="game.js"></script>
+    <script src="../game.js"></script>
     <script>
       renderProgress(4, 14);
     </script>
