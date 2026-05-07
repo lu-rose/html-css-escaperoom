@@ -290,7 +290,7 @@
       <div class="mission-box">
         <div class="mission-label">Mission briefing</div>
         <p class="mission-text">
-          QA has filed <strong>14 bug reports</strong>. Using only your
+          QA has filed <strong>20 bug reports</strong>. Using only your
           browser's DevTools, your whole team must investigate each issue. Find
           what is wrong, and fix the problem to move on. <br /><br />
           This is not a solo developer task. <strong>Work together.</strong>
@@ -316,9 +316,11 @@
       /* Clear any previous run so the timer is fresh on revisit */
       sessionStorage.removeItem("escapeRoomStart_2026");
       localStorage.removeItem("escapeRoomStart_2026");
+      sessionStorage.removeItem("escapeRoomStart_2026_timeout_notice_shown");
 
       function startGame() {
         const start = Date.now().toString();
+        sessionStorage.removeItem("escapeRoomStart_2026_timeout_notice_shown");
         sessionStorage.setItem("escapeRoomStart_2026", start);
         localStorage.setItem("escapeRoomStart_2026", start);
         window.location = "tasks/01-alt-text-accessibility.html";

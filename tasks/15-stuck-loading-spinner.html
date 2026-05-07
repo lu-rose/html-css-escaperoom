@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Report 07 — Loading Spinner Never Ends</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <a href="06-line-height-spacing.html" class="back-link">← Back</a>
+      <div id="progress" class="progress"></div>
+
+      <div class="bug-label">Bug Report 07 / 20</div>
+      <h1>Loading Spinner Never Ends</h1>
+
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: QA</span>
+          <span>&middot;</span>
+          <span>UI state stuck in loading</span>
+        </div>
+        <p class="ticket-desc">
+          The operation is complete, but users still see a loading overlay
+          forever. In DevTools, find what keeps the loading layer visible and
+          remove that blocker.
+        </p>
+      </div>
+
+      <div class="puzzle" style="position: relative; min-height: 190px">
+        <div
+          id="loading-overlay"
+          style="
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+          "
+        >
+          <div style="text-align: center">
+            <div style="font-size: 24px; margin-bottom: 6px">⏳</div>
+            <div style="font-size: 13px; color: #6b708a; font-weight: 600">
+              Loading payment status...
+            </div>
+          </div>
+        </div>
+        <div
+          id="payment-card"
+          style="
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafbff;
+            min-height: 170px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <strong style="font-size: 16px">Payment confirmed</strong>
+          <span style="font-size: 13px; color: #6b708a; margin-top: 6px"
+            >Reference: INV-2026-9182</span
+          >
+        </div>
+      </div>
+
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
+      <div class="hint-box" id="hint">
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Inspect the loading layer and check whether
+          it should still be displayed.
+        </p>
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            Find <code>#loading-overlay</code> in Elements and set it to
+            <code>display: none</code> (or hide/delete it another way). As soon
+            as the overlay is gone, you can continue.
+          </div>
+        </details>
+      </div>
+
+      <div
+        id="next-btn"
+        style="
+          display: none;
+          margin-top: 1rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid #dde1f5;
+        "
+      >
+        <p
+          style="
+            font-size: 13px;
+            color: #16a34a;
+            font-weight: 600;
+            margin-bottom: 10px;
+          "
+        >
+          &#10003; Loading cleared!
+        </p>
+        <a
+          href="16-accordion-wont-expand.html"
+          style="
+            display: inline-block;
+            background: #5865f5;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+          "
+          >Next bug report &rarr;</a
+        >
+      </div>
+    </div>
+
+    <script src="../game.js"></script>
+    <script>
+      renderProgress(7, 20);
+      function checkLoadingFixed() {
+        const overlay = document.getElementById("loading-overlay");
+        const card = document.getElementById("payment-card");
+        if (!overlay) {
+          document.getElementById("next-btn").style.display = "block";
+          return;
+        }
+        const cs = getComputedStyle(overlay);
+        const visuallyGone =
+          cs.display === "none" ||
+          cs.visibility === "hidden" ||
+          parseFloat(cs.opacity) === 0;
+        const notInteractive = cs.pointerEvents === "none";
+        const notLayered =
+          cs.position === "static" ||
+          cs.position === "relative" ||
+          cs.position === "initial" ||
+          cs.position === "unset";
+        const tooSmall =
+          parseFloat(cs.width) <= 2 || parseFloat(cs.height) <= 2;
+        const behindContent =
+          Number.isFinite(parseInt(cs.zIndex, 10)) &&
+          parseInt(cs.zIndex, 10) < 0;
+
+        let noLongerCoversCard = false;
+        if (card) {
+          const overlayRect = overlay.getBoundingClientRect();
+          const cardRect = card.getBoundingClientRect();
+          const horizontalOverlap =
+            Math.min(overlayRect.right, cardRect.right) -
+            Math.max(overlayRect.left, cardRect.left);
+          const verticalOverlap =
+            Math.min(overlayRect.bottom, cardRect.bottom) -
+            Math.max(overlayRect.top, cardRect.top);
+          noLongerCoversCard = horizontalOverlap <= 0 || verticalOverlap <= 0;
+        }
+
+        const unblocked =
+          visuallyGone ||
+          notInteractive ||
+          notLayered ||
+          tooSmall ||
+          behindContent ||
+          noLongerCoversCard;
+
+        document.getElementById("next-btn").style.display = unblocked
+          ? "block"
+          : "none";
+      }
+      setInterval(checkLoadingFixed, 400);
+    </script>
+  </body>
+</html>

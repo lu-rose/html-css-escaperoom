@@ -160,7 +160,7 @@
         You made it! 🎉
       </h1>
       <p style="font-size: 15px; color: var(--muted); margin-bottom: 0.75rem">
-        All 14 bugs resolved.
+        All 20 bugs resolved.
       </p>
       <p
         id="time-used"
@@ -247,18 +247,40 @@
         <div class="resolved-item">
           <span class="check">&#10003;</span>
           <div>
-            <span class="resolved-label">Bug 07</span> Removed a transparent
-            overlay that blocked all clicks
+            <span class="resolved-label">Bug 07</span> Cleared a loading overlay
+            that never disappeared after success
             <span class="why-matters"
-              >Why this matters: Invisible blockers create dead UI and are hard
-              to debug without inspection.</span
+              >Why this matters: Stuck loading states hide successful outcomes
+              and break user trust.</span
             >
           </div>
         </div>
         <div class="resolved-item">
           <span class="check">&#10003;</span>
           <div>
-            <span class="resolved-label">Bug 08</span> Identified a hard-coded
+            <span class="resolved-label">Bug 08</span> Expanded a collapsed
+            accordion answer panel
+            <span class="why-matters"
+              >Why this matters: If key content stays collapsed, users cannot
+              complete critical tasks.</span
+            >
+          </div>
+        </div>
+        <div class="resolved-item">
+          <span class="check">&#10003;</span>
+          <div>
+            <span class="resolved-label">Bug 09</span> Removed a hidden required
+            field that blocked submission
+            <span class="why-matters"
+              >Why this matters: Invisible validation blockers cause frustration
+              and false form failures.</span
+            >
+          </div>
+        </div>
+        <div class="resolved-item">
+          <span class="check">&#10003;</span>
+          <div>
+            <span class="resolved-label">Bug 10</span> Identified a hard-coded
             swatch color that bypassed the design system
             <span class="why-matters"
               >Why this matters: Hardcoded values drift from tokens and make
@@ -269,7 +291,7 @@
         <div class="resolved-item">
           <span class="check">&#10003;</span>
           <div>
-            <span class="resolved-label">Bug 09</span> Found the feature flag
+            <span class="resolved-label">Bug 11</span> Found the feature flag
             set to OFF in production
             <span class="why-matters"
               >Why this matters: Misconfigured flags can silently disable
@@ -280,7 +302,7 @@
         <div class="resolved-item">
           <span class="check">&#10003;</span>
           <div>
-            <span class="resolved-label">Bug 10</span> Made near-invisible tiny
+            <span class="resolved-label">Bug 12</span> Made near-invisible tiny
             text readable again
             <span class="why-matters"
               >Why this matters: Tiny text harms readability and can hide
@@ -291,7 +313,7 @@
         <div class="resolved-item">
           <span class="check">&#10003;</span>
           <div>
-            <span class="resolved-label">Bug 11</span> Adjusted z-index so the
+            <span class="resolved-label">Bug 13</span> Adjusted z-index so the
             important status message appears on top
             <span class="why-matters"
               >Why this matters: Layering bugs hide priority content behind less
@@ -302,7 +324,7 @@
         <div class="resolved-item">
           <span class="check">&#10003;</span>
           <div>
-            <span class="resolved-label">Bug 12</span> Paused a runaway
+            <span class="resolved-label">Bug 14</span> Paused a runaway
             animation to reveal the hidden text
             <span class="why-matters"
               >Why this matters: Motion can reduce readability and overwhelm
@@ -313,7 +335,51 @@
         <div class="resolved-item">
           <span class="check">&#10003;</span>
           <div>
-            <span class="resolved-label">Bug 13</span> Replaced a hardcoded
+            <span class="resolved-label">Bug 15</span> Fixed locale
+            configuration for regional price formatting
+            <span class="why-matters"
+              >Why this matters: Wrong locale formatting creates confusion and
+              can affect purchasing decisions.</span
+            >
+          </div>
+        </div>
+        <div class="resolved-item">
+          <span class="check">&#10003;</span>
+          <div>
+            <span class="resolved-label">Bug 16</span> Removed a transparent
+            overlay that blocked all clicks
+            <span class="why-matters"
+              >Why this matters: Invisible blockers create dead UI and are hard
+              to debug without inspection.</span
+            >
+          </div>
+        </div>
+        <div class="resolved-item">
+          <span class="check">&#10003;</span>
+          <div>
+            <span class="resolved-label">Bug 17</span> Resolved a CSS cascade
+            conflict that hid button text
+            <span class="why-matters"
+              >Why this matters: Understanding cascade and specificity prevents
+              regressions in large codebases.</span
+            >
+          </div>
+        </div>
+        <div class="resolved-item">
+          <span class="check">&#10003;</span>
+          <div>
+            <span class="resolved-label">Bug 18</span> Fixed a console-triggered
+            typo that blocked deploy execution
+            <span class="why-matters"
+              >Why this matters: Reading and fixing console errors quickly is a
+              core production debugging skill.</span
+            >
+          </div>
+        </div>
+        <div class="resolved-item">
+          <span class="check">&#10003;</span>
+          <div>
+            <span class="resolved-label">Bug 19</span> Replaced a hardcoded
             value with the correct design token
             <span class="why-matters"
               >Why this matters: Token usage keeps UI consistent and enables
@@ -324,7 +390,7 @@
         <div class="resolved-item">
           <span class="check">&#10003;</span>
           <div>
-            <span class="resolved-label">Bug 14</span> Unlocked the final
+            <span class="resolved-label">Bug 20</span> Unlocked the final
             release action and deployed to production
             <span class="why-matters"
               >Why this matters: A single disabled control can block releases

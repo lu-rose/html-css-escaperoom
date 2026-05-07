@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Report 15 — Wrong Locale Formatting</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <a href="12-distracting-animation.html" class="back-link">← Back</a>
+      <div id="progress" class="progress"></div>
+
+      <div class="bug-label">Bug Report 15 / 20</div>
+      <h1>Wrong Locale Formatting</h1>
+
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: Finance</span>
+          <span>&middot;</span>
+          <span>Regional format mismatch</span>
+        </div>
+        <p class="ticket-desc">
+          Bug report from support: "The price format looks broken for our
+          Polish customers." Inspect the price component and figure out
+          what's wrong, and fix it.
+        </p>
+      </div>
+
+      <div class="puzzle">
+        <div
+          style="
+            background: #fafbff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+          "
+        >
+          <p
+            style="
+              font-size: 11px;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #b0b5d0;
+              margin-bottom: 8px;
+            "
+          >
+            Invoice total
+          </p>
+          <strong
+            id="price"
+            data-locale="en-US"
+            data-amount="1299"
+            style="font-size: 28px; color: #1c1f3d"
+            >$1,299.00</strong
+          >
+          <p style="font-size: 12px; color: #6b708a; margin-top: 8px">
+            Expected style for workshop:
+            <code id="expected-style">1299,00 zł</code>
+          </p>
+        </div>
+      </div>
+
+      <details
+        id="locale-reference"
+        style="
+          margin-top: 1rem;
+          border: 1px solid #dde1f5;
+          border-radius: 8px;
+          background: #fafbff;
+          padding: 0.75rem 1rem;
+        "
+      >
+        <summary style="cursor: pointer; font-weight: 700; color: #1c1f3d">
+          Locale reference (Europe)
+        </summary>
+        <p style="margin-top: 0.75rem; font-size: 12px; color: #6b708a">
+          Use this list as locale lookup help. The puzzle only passes when the
+          rendered result matches the expected style shown above.
+        </p>
+        <details style="margin-top: 0.65rem">
+          <summary style="cursor: pointer; font-size: 12px; font-weight: 600">
+            Northern Europe
+          </summary>
+          <p style="margin-top: 0.5rem; font-size: 12px; line-height: 1.7">
+            <code>nb-NO</code> Norway — NOK (kr)<br />
+            <code>nn-NO</code> Norway (Nynorsk) — NOK (kr)<br />
+            <code>sv-SE</code> Sweden — SEK (kr)<br />
+            <code>da-DK</code> Denmark — DKK (kr)<br />
+            <code>fi-FI</code> Finland — EUR (€)<br />
+            <code>is-IS</code> Iceland — ISK (kr)<br />
+            <code>et-EE</code> Estonia — EUR (€)<br />
+            <code>lv-LV</code> Latvia — EUR (€)<br />
+            <code>lt-LT</code> Lithuania — EUR (€)<br />
+            <code>en-GB</code> United Kingdom — GBP (£)<br />
+            <code>ga-IE</code> Ireland — EUR (€)
+          </p>
+        </details>
+        <details style="margin-top: 0.5rem">
+          <summary style="cursor: pointer; font-size: 12px; font-weight: 600">
+            Western/Central Europe
+          </summary>
+          <p style="margin-top: 0.5rem; font-size: 12px; line-height: 1.7">
+            <code>de-DE</code> Germany — EUR (€)<br />
+            <code>de-AT</code> Austria — EUR (€)<br />
+            <code>de-CH</code> Switzerland — CHF<br />
+            <code>de-LU</code> Luxembourg — EUR (€)<br />
+            <code>de-LI</code> Liechtenstein — CHF<br />
+            <code>fr-FR</code> France — EUR (€)<br />
+            <code>fr-BE</code> Belgium — EUR (€)<br />
+            <code>fr-CH</code> Switzerland — CHF<br />
+            <code>nl-NL</code> Netherlands — EUR (€)<br />
+            <code>nl-BE</code> Belgium — EUR (€)<br />
+            <code>lb-LU</code> Luxembourg — EUR (€)<br />
+            <code>cs-CZ</code> Czechia — CZK (Kc)<br />
+            <code>sk-SK</code> Slovakia — EUR (€)<br />
+            <code>pl-PL</code> Poland — PLN (zł)<br />
+            <code>hu-HU</code> Hungary — HUF (Ft)<br />
+            <code>ro-RO</code> Romania — RON (lei)<br />
+            <code>ro-MD</code> Moldova — MDL (lei)
+          </p>
+        </details>
+        <details style="margin-top: 0.5rem">
+          <summary style="cursor: pointer; font-size: 12px; font-weight: 600">
+            Southern Europe
+          </summary>
+          <p style="margin-top: 0.5rem; font-size: 12px; line-height: 1.7">
+            <code>es-ES</code> Spain — EUR (€)<br />
+            <code>pt-PT</code> Portugal — EUR (€)<br />
+            <code>it-IT</code> Italy — EUR (€)<br />
+            <code>el-GR</code> Greece — EUR (€)<br />
+            <code>mt-MT</code> Malta — EUR (€)<br />
+            <code>hr-HR</code> Croatia — EUR (€)<br />
+            <code>sl-SI</code> Slovenia — EUR (€)<br />
+            <code>bs-BA</code> Bosnia and Herzegovina — BAM (KM)<br />
+            <code>sr-RS</code> Serbia — RSD<br />
+            <code>sr-ME</code> Montenegro — EUR (€)<br />
+            <code>mk-MK</code> North Macedonia — MKD<br />
+            <code>sq-AL</code> Albania — ALL (lek)
+          </p>
+        </details>
+        <details style="margin-top: 0.5rem">
+          <summary style="cursor: pointer; font-size: 12px; font-weight: 600">
+            Eastern Europe/Caucasus
+          </summary>
+          <p style="margin-top: 0.5rem; font-size: 12px; line-height: 1.7">
+            <code>bg-BG</code> Bulgaria — BGN (lv)<br />
+            <code>uk-UA</code> Ukraine — UAH (hrn)<br />
+            <code>ru-RU</code> Russia — RUB<br />
+            <code>be-BY</code> Belarus — BYN<br />
+            <code>tr-TR</code> Turkey — TRY<br />
+            <code>ka-GE</code> Georgia — GEL<br />
+            <code>hy-AM</code> Armenia — AMD<br />
+            <code>az-AZ</code> Azerbaijan — AZN
+          </p>
+        </details>
+      </details>
+
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
+      <div class="hint-box" id="hint">
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Inspect the price element and look for a
+          locale setting to update.
+        </p>
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            Change <code>data-locale</code> on <code>#price</code> from
+            <code>en-US</code> and compare the rendered value against the
+            expected style.
+          </div>
+        </details>
+      </div>
+
+      <div
+        id="next-btn"
+        style="
+          display: none;
+          margin-top: 1rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid #dde1f5;
+        "
+      >
+        <p
+          style="
+            font-size: 13px;
+            color: #16a34a;
+            font-weight: 600;
+            margin-bottom: 10px;
+          "
+        >
+          &#10003; Locale configuration fixed!
+        </p>
+        <a
+          href="07-click-blocking-overlay.html"
+          style="
+            display: inline-block;
+            background: #5865f5;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+          "
+          >Next bug report &rarr;</a
+        >
+      </div>
+    </div>
+
+    <script src="../game.js"></script>
+    <script>
+      renderProgress(15, 20);
+
+      function normalizeSpace(text) {
+        return text
+          .replace(/\u00a0|\u202f/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function formatPrice(locale, currency, amount) {
+        try {
+          return new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency,
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(amount);
+        } catch (_err) {
+          return null;
+        }
+      }
+
+      function currencyFromLocale(locale) {
+        const key = (locale || "").toLowerCase();
+        const byLocale = {
+          "en-us": "USD",
+          "nb-no": "NOK",
+          "nn-no": "NOK",
+          "sv-se": "SEK",
+          "da-dk": "DKK",
+          "fi-fi": "EUR",
+          "is-is": "ISK",
+          "et-ee": "EUR",
+          "lv-lv": "EUR",
+          "lt-lt": "EUR",
+          "en-gb": "GBP",
+          "ga-ie": "EUR",
+          "de-de": "EUR",
+          "de-at": "EUR",
+          "de-ch": "CHF",
+          "de-lu": "EUR",
+          "de-li": "CHF",
+          "fr-fr": "EUR",
+          "fr-be": "EUR",
+          "fr-ch": "CHF",
+          "nl-nl": "EUR",
+          "nl-be": "EUR",
+          "lb-lu": "EUR",
+          "cs-cz": "CZK",
+          "sk-sk": "EUR",
+          "pl-pl": "PLN",
+          "hu-hu": "HUF",
+          "ro-ro": "RON",
+          "ro-md": "MDL",
+          "es-es": "EUR",
+          "pt-pt": "EUR",
+          "it-it": "EUR",
+          "el-gr": "EUR",
+          "mt-mt": "EUR",
+          "hr-hr": "EUR",
+          "sl-si": "EUR",
+          "bs-ba": "BAM",
+          "sr-rs": "RSD",
+          "sr-me": "EUR",
+          "mk-mk": "MKD",
+          "sq-al": "ALL",
+          "bg-bg": "BGN",
+          "uk-ua": "UAH",
+          "ru-ru": "RUB",
+          "be-by": "BYN",
+          "tr-tr": "TRY",
+          "ka-ge": "GEL",
+          "hy-am": "AMD",
+          "az-az": "AZN",
+        };
+        return byLocale[key] || "EUR";
+      }
+
+      function checkLocaleFixed() {
+        const price = document.getElementById("price");
+        const expectedEl = document.getElementById("expected-style");
+        if (!price || !expectedEl) return;
+        const expectedStyle = normalizeSpace(expectedEl.textContent);
+        const locale = (price.dataset.locale || "").trim();
+        const currency = currencyFromLocale(locale);
+        const amount = Number(price.dataset.amount || "1299");
+        const formattedValue =
+          formatPrice(locale, currency, amount) || "$1,299.00";
+        price.textContent = formattedValue;
+        const normalizedFormatted = normalizeSpace(formattedValue);
+        const ok = normalizedFormatted === expectedStyle;
+        const localeReference = document.getElementById("locale-reference");
+
+        if (ok && localeReference) {
+          localeReference.open = false;
+        }
+
+        document.getElementById("next-btn").style.display = ok
+          ? "block"
+          : "none";
+      }
+      checkLocaleFixed();
+      setInterval(checkLocaleFixed, 400);
+    </script>
+  </body>
+</html>

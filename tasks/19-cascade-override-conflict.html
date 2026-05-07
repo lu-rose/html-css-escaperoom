@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Report 17 — Cascade Override Conflict</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .save-btn {
+        background: #5865f5;
+        color: #ffffff;
+      }
+      .panel .save-btn {
+        color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="07-click-blocking-overlay.html" class="back-link">← Back</a>
+      <div id="progress" class="progress"></div>
+
+      <div class="bug-label">Bug Report 17 / 20</div>
+      <h1>Cascade Override Conflict</h1>
+
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: Developer</span>
+          <span>&middot;</span>
+          <span>CSS specificity conflict</span>
+        </div>
+        <p class="ticket-desc">
+          The Save button renders, but the text is invisible due to a
+          conflicting CSS rule. Use DevTools to find the winning declaration and
+          fix it.
+        </p>
+      </div>
+
+      <div
+        class="puzzle panel"
+        style="
+          background: #fafbff;
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 1.25rem;
+        "
+      >
+        <p
+          id="cascade-feedback"
+          style="font-size: 13px; color: #b0b5d0; margin-bottom: 10px"
+        >
+          Fix the button text visibility, then click the same button to
+          continue.
+        </p>
+        <button
+          id="override-btn"
+          class="save-btn"
+          onclick="continueIfFixed()"
+          style="
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+          "
+        >
+          Save changes
+        </button>
+      </div>
+
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
+      <div class="hint-box" id="hint">
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Open the Computed panel for the button text
+          color and inspect which CSS rule is winning.
+        </p>
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            The rule <code>.panel .save-btn</code> sets transparent text.
+            Override or remove that declaration so the button label is readable.
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <script src="../game.js"></script>
+    <script>
+      renderProgress(17, 20);
+      function rgbToHex(rgbString) {
+        const rgb = rgbString.match(/\d+(\.\d+)?/g);
+        if (!rgb || rgb.length < 3) return null;
+        const [r, g, b] = rgb.slice(0, 3).map((n) => Number(n));
+        const toHex = (n) => n.toString(16).padStart(2, "0");
+        return "#" + toHex(r) + toHex(g) + toHex(b);
+      }
+      function checkCascadeFixed() {
+        const btn = document.getElementById("override-btn");
+        const feedback = document.getElementById("cascade-feedback");
+        const s = getComputedStyle(btn);
+        const color = rgbToHex(s.color);
+        const bg = rgbToHex(s.backgroundColor);
+        const transparent =
+          s.color === "transparent" ||
+          /^rgba\(\d+,\s*\d+,\s*\d+,\s*0\)$/.test(s.color);
+        const readable = color && bg && color !== bg && !transparent;
+        btn.dataset.fixed = readable ? "1" : "0";
+        feedback.textContent = readable
+          ? "✓ Cascade conflict resolved. Click 'Save changes' to continue."
+          : "Fix the button text visibility, then click the same button to continue.";
+        feedback.style.color = readable ? "#16a34a" : "#b0b5d0";
+      }
+      function continueIfFixed() {
+        const btn = document.getElementById("override-btn");
+        if (btn.dataset.fixed === "1") {
+          window.location = "20-console-error-hotfix.html";
+        }
+      }
+      setInterval(checkCascadeFixed, 400);
+    </script>
+  </body>
+</html>

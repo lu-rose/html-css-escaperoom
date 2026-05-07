@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Report 08 — Accordion Won't Expand</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <a href="15-stuck-loading-spinner.html" class="back-link">← Back</a>
+      <div id="progress" class="progress"></div>
+
+      <div class="bug-label">Bug Report 08 / 20</div>
+      <h1>Accordion Won't Expand</h1>
+
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: Product Owner</span>
+          <span>&middot;</span>
+          <span>Important FAQ answer hidden</span>
+        </div>
+        <p class="ticket-desc">
+          Users click the question, but the answer panel stays collapsed.
+          Inspect the answer container and fix the style that keeps it closed.
+        </p>
+      </div>
+
+      <div class="puzzle">
+        <div
+          style="
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+          "
+        >
+          <button
+            id="faq-toggle"
+            type="button"
+            style="
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 12px 14px;
+              background: #fafbff;
+              font-size: 13px;
+              font-weight: 700;
+              border: none;
+              cursor: pointer;
+            "
+            aria-expanded="false"
+            onclick="toggleChevron()"
+          >
+            <span>Can we deploy during incident mode?</span>
+            <span
+              id="chevron"
+              style="
+                display: inline-block;
+                transition: transform 0.2s;
+                color: #6b708a;
+                font-size: 14px;
+              "
+              >▾</span
+            >
+          </button>
+          <div style="padding: 0; border-top: 1px solid #eef0fe"></div>
+          <div
+            id="faq-answer"
+            style="
+              max-height: 0;
+              overflow: hidden;
+              padding: 0 14px;
+              background: white;
+              transition: max-height 0.2s;
+            "
+          >
+            <p style="font-size: 13px; color: #4b4f72; padding: 10px 0 14px">
+              Yes. Deploy is allowed after critical checks pass and status is
+              green.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
+      <div class="hint-box" id="hint">
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Inspect <code>#faq-answer</code> and look
+          for the property controlling collapsed height.
+        </p>
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            Change <code>max-height: 0</code> to a value that reveals the
+            content (for example <code>80px</code>+), or remove the restriction.
+          </div>
+        </details>
+      </div>
+
+      <div
+        id="next-btn"
+        style="
+          display: none;
+          margin-top: 1rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid #dde1f5;
+        "
+      >
+        <p
+          style="
+            font-size: 13px;
+            color: #16a34a;
+            font-weight: 600;
+            margin-bottom: 10px;
+          "
+        >
+          &#10003; FAQ content is visible!
+        </p>
+        <a
+          href="17-hidden-required-field.html"
+          style="
+            display: inline-block;
+            background: #5865f5;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+          "
+          >Next bug report &rarr;</a
+        >
+      </div>
+    </div>
+
+    <script src="../game.js"></script>
+    <script>
+      renderProgress(8, 20);
+      function toggleChevron() {
+        const t = document.getElementById("faq-toggle");
+        const c = document.getElementById("chevron");
+        const expanded = t.getAttribute("aria-expanded") === "true";
+        t.setAttribute("aria-expanded", expanded ? "false" : "true");
+        c.style.transform = expanded ? "rotate(0deg)" : "rotate(180deg)";
+      }
+      function checkAccordionFixed() {
+        const panel = document.getElementById("faq-answer");
+        const h = panel.getBoundingClientRect().height;
+        document.getElementById("next-btn").style.display =
+          h > 35 ? "block" : "none";
+      }
+      setInterval(checkAccordionFixed, 400);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Report 09 — Hidden Required Field</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <a href="16-accordion-wont-expand.html" class="back-link">← Back</a>
+      <div id="progress" class="progress"></div>
+
+      <div class="bug-label">Bug Report 09 / 20</div>
+      <h1>Form Is Blocked by Hidden Field</h1>
+
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: QA</span>
+          <span>&middot;</span>
+          <span>Validation issue</span>
+        </div>
+        <p class="ticket-desc">
+          The visible fields are complete, but the form still cannot be
+          submitted. Inspect the markup for hidden validation blockers.
+        </p>
+      </div>
+
+      <div class="puzzle">
+        <form
+          id="release-form"
+          class="answer-row"
+          onsubmit="submitRelease(event)"
+          style="display: block"
+        >
+          <label
+            style="
+              display: block;
+              font-size: 12px;
+              margin-bottom: 6px;
+              color: #6b708a;
+              font-weight: 600;
+            "
+            >Release note</label
+          >
+          <input
+            type="text"
+            value="Patch validated"
+            required
+            style="
+              width: 100%;
+              margin-bottom: 10px;
+              border: 1.5px solid #dde1f5;
+              border-radius: 6px;
+              padding: 9px 11px;
+              font-size: 13px;
+            "
+          />
+          <input id="ghost-required" required value="" style="display: none" />
+          <button
+            id="form-submit"
+            type="submit"
+            disabled
+            style="
+              width: 100%;
+              margin-top: 4px;
+              background: #5865f5;
+              color: white;
+              border: none;
+              border-radius: 6px;
+              padding: 10px 12px;
+              font-weight: 600;
+            "
+          >
+            Submit release form
+          </button>
+          <p
+            id="release-feedback"
+            style="margin-top: 10px; font-size: 13px; color: #b0b5d0"
+          >
+            Fix validation blockers to enable submit.
+          </p>
+        </form>
+      </div>
+
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
+      <div class="hint-box" id="hint">
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> There is a hidden input affecting form
+          validity. Inspect the form children carefully.
+        </p>
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            Find <code>#ghost-required</code>. Remove its
+            <code>required</code> attribute or disable the field so it no longer
+            blocks submission.
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <script src="../game.js"></script>
+    <script>
+      renderProgress(9, 20);
+      function checkRequiredFixed() {
+        const form = document.getElementById("release-form");
+        const submit = document.getElementById("form-submit");
+        const feedback = document.getElementById("release-feedback");
+        const fixed = form.checkValidity();
+        submit.disabled = !fixed;
+        submit.style.pointerEvents = fixed ? "auto" : "none";
+        submit.setAttribute("aria-disabled", fixed ? "false" : "true");
+        if (fixed) {
+          feedback.textContent =
+            "✓ Validation looks good. Click submit to continue.";
+          feedback.style.color = "#16a34a";
+        } else {
+          feedback.textContent = "Fix validation blockers to enable submit.";
+          feedback.style.color = "#b0b5d0";
+        }
+      }
+      function submitRelease(e) {
+        e.preventDefault();
+        const form = document.getElementById("release-form");
+        if (!form.checkValidity()) return;
+        window.location = "08-wrong-color-swatch.html";
+      }
+      const ghost = document.getElementById("ghost-required");
+      if (ghost) {
+        new MutationObserver(checkRequiredFixed).observe(ghost, {
+          attributes: true,
+          attributeFilter: ["required", "disabled", "style", "type", "hidden"],
+        });
+      }
+      checkRequiredFixed();
+      setInterval(checkRequiredFixed, 400);
+    </script>
+  </body>
+</html>

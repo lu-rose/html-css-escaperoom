@@ -73,6 +73,12 @@ function checkAnswer(e, enc, next) {
     "color:#16a34a;display:block;transition:color .4s}",
     "#gTimer.yellow .gtd{color:#d97706}",
     "#gTimer.red .gtd{color:#dc2626}",
+    "#timeoutOverlay{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:10000;display:flex;align-items:center;justify-content:center;padding:1rem}",
+    "#timeoutDialog{width:min(440px,100%);background:#fff;border:1px solid #fca5a5;border-radius:12px;box-shadow:0 18px 45px rgba(15,23,42,.22);padding:1.25rem 1.3rem}",
+    "#timeoutDialog h2{margin:0 0 .5rem;font-size:20px;color:#991b1b}",
+    "#timeoutDialog p{margin:0 0 1rem;font-size:14px;line-height:1.6;color:#334155}",
+    "#timeoutDialog button{background:#dc2626;color:#fff;border:none;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer}",
+    "#timeoutDialog button:hover{opacity:.92}",
   ].join("");
   document.head.appendChild(style);
 
@@ -84,12 +90,40 @@ function checkAnswer(e, enc, next) {
   document.body.appendChild(w);
 
   const disp = w.querySelector(".gtd");
+  const timeoutSeenKey = TIMER_KEY + "_timeout_notice_shown";
+  let timeoutDialogShown = false;
+
+  function showTimeoutDialog() {
+    if (timeoutDialogShown) return;
+    timeoutDialogShown = true;
+    sessionStorage.setItem(timeoutSeenKey, "1");
+
+    const overlay = document.createElement("div");
+    overlay.id = "timeoutOverlay";
+    overlay.innerHTML = [
+      '<div id="timeoutDialog" role="dialog" aria-modal="true" aria-labelledby="timeoutTitle">',
+      '<h2 id="timeoutTitle">Time is up</h2>',
+      "<p>The debugging session timer has reached 00:00. You can still continue and finish the remaining bug reports.</p>",
+      '<button type="button" id="timeoutDismiss">Continue anyway</button>',
+      "</div>",
+    ].join("");
+    document.body.appendChild(overlay);
+
+    const close = () => overlay.remove();
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) close();
+    });
+    overlay.querySelector("#timeoutDismiss").addEventListener("click", close);
+  }
 
   function tick() {
     const elapsed = Math.floor((Date.now() - parseInt(start, 10)) / 1000);
     const left = Math.max(0, TIMER_DURATION - elapsed);
     disp.textContent = _pad(Math.floor(left / 60)) + ":" + _pad(left % 60);
     w.className = left <= 5 * 60 ? "red" : left <= 15 * 60 ? "yellow" : "";
+    if (left === 0 && !sessionStorage.getItem(timeoutSeenKey)) {
+      showTimeoutDialog();
+    }
     if (left > 0) setTimeout(tick, 500);
   }
 

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Report 18 — Console Error Hotfix</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <a href="19-cascade-override-conflict.html" class="back-link">← Back</a>
+      <div id="progress" class="progress"></div>
+
+      <div class="bug-label">Bug Report 18 / 20</div>
+      <h1>Console Error Hotfix</h1>
+
+      <div class="ticket">
+        <div class="ticket-meta">
+          <span class="tag tag-open">Open</span>
+          <span>Reported by: Incident Commander</span>
+          <span>&middot;</span>
+          <span>Final release script failing</span>
+        </div>
+        <p class="ticket-desc">
+          This is the final blocker. Clicking the hotfix button throws an error
+          and deploy does not start. The button calls the function
+          <code>startDeploy()</code> with a typo. Use the Console to identify
+          and correct the typo. Click the button again to check if your fix
+          works.
+        </p>
+      </div>
+
+      <div class="puzzle" style="text-align: center">
+        <button
+          id="hotfix-btn"
+          onclick="startDeply()"
+          style="
+            background: #5865f5;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+          "
+        >
+          Run Hotfix Deploy
+        </button>
+        <p
+          id="deploy-msg"
+          style="margin-top: 14px; color: #6b708a; font-size: 13px"
+        >
+          Status: waiting for deploy...
+        </p>
+      </div>
+
+      <button class="hint-toggle" onclick="toggleHint()">
+        Stuck? Need help?
+      </button>
+      <div class="hint-box" id="hint">
+        <p style="margin-bottom: 0">
+          <strong>Level 1:</strong> Click the button and inspect the Console
+          error. Then inspect the button attribute that triggers the function.
+        </p>
+        <details style="margin-top: 10px">
+          <summary style="cursor: pointer; font-weight: 600">
+            Still stuck? Show Level 2
+          </summary>
+          <div style="margin-top: 10px">
+            The button calls <code>startDeply()</code> (typo). Change it to
+            <code>startDeploy()</code> in DevTools and click again.
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <script src="../game.js"></script>
+    <script>
+      renderProgress(18, 20);
+      window.startDeploy = function () {
+        document.getElementById("deploy-msg").textContent =
+          "Status: deploy successful. Redirecting...";
+        document.getElementById("deploy-msg").style.color = "#16a34a";
+        setTimeout(() => {
+          window.location = "13-design-token-mismatch.html";
+        }, 1200);
+      };
+    </script>
+  </body>
+</html>
