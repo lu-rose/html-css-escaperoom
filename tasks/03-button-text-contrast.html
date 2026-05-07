@@ -28,9 +28,18 @@
         <p class="ticket-desc">
           The "Send message" button is technically present, but the text is
           invisible. Users see a box but have no idea what it does. The text and
-          background are nearly the same shade of grey. WCAG AA requires at
-          least 4.5:1 contrast ratio for body text. Enter a hex color for the
-          text that passes WCAG AA.
+          background are nearly the same shade of grey. In DevTools, edit either
+          the button text color or the button background color until the
+          contrast passes WCAG AA. When the ratio is good enough, a continue
+          button will appear automatically.
+          <br /><br />
+          Official reference:
+          <a
+            href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            >WCAG 2.2 — Contrast (Minimum)</a
+          >.
         </p>
       </div>
 
@@ -127,30 +136,56 @@
             <code>color</code> value in Styles and scroll down — it shows the
             current contrast ratio.<br /><br />
             <strong>Step 3:</strong> Pick any color with ratio &ge; 4.5:1. Dark
-            grey or black always works. Enter the hex code, e.g. #FFFFFF.
+            grey text or a much darker/lighter background always works. When the
+            ratio passes, the next button appears automatically.
           </div>
         </details>
       </div>
 
-      <form class="answer-row" onsubmit="checkContrastAnswer(event)">
-        <input
-          type="text"
-          class="answer-input"
-          id="contrast-input"
-          placeholder="e.g. #FFFFFF..."
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <button type="submit" class="btn-submit">Submit</button>
-      </form>
-      <div class="feedback" id="feedback"></div>
+      <div
+        id="contrast-status"
+        style="
+          margin-top: 4px;
+          font-size: 13px;
+          color: #b0b5d0;
+          font-weight: 500;
+        "
+      >
+        Current contrast: checking...
+      </div>
+      <div
+        id="next-btn"
+        style="
+          display: none;
+          margin-top: 1rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid #dde1f5;
+        "
+      >
+        <p style="font-size: 13px; color: #16a34a; font-weight: 600; margin-bottom: 10px">
+          &#10003; WCAG AA contrast passed!
+        </p>
+        <a
+          href="04-off-screen-content.html"
+          style="
+            display: inline-block;
+            background: #5865f5;
+            color: #fff;
+            font-family: -apple-system, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+          "
+          >Next bug report &rarr;</a
+        >
+      </div>
     </div>
 
     <script src="../game.js"></script>
     <script>
       renderProgress(3, 14);
-
-      const BG = "#f0f0f0";
 
       function hexToRgb(hex) {
         hex = hex.replace(/^#/, "");
@@ -184,53 +219,36 @@
         return (lighter + 0.05) / (darker + 0.05);
       }
 
-      function normaliseHex(val) {
-        val = val.trim();
-        if (!val.startsWith("#")) val = "#" + val;
-        return val.toLowerCase();
+      function rgbStringToHex(rgbString) {
+        const rgb = rgbString.match(/\d+(\.\d+)?/g);
+        if (!rgb || rgb.length < 3) return null;
+        const [r, g, b] = rgb.slice(0, 3).map((n) => Number(n));
+        const toHex = (n) => n.toString(16).padStart(2, "0");
+        return "#" + toHex(r) + toHex(g) + toHex(b);
       }
 
-      function checkContrastAnswer(e) {
-        e.preventDefault();
-        const raw = document.getElementById("contrast-input").value;
-        const hex = normaliseHex(raw);
-        const fb = document.getElementById("feedback");
+      function checkContrastFixed() {
+        const status = document.getElementById("contrast-status");
+        const btn = document.getElementById("broken-btn");
+        const next = document.getElementById("next-btn");
+        const styles = getComputedStyle(btn);
+        const fgHex = rgbStringToHex(styles.color);
+        const bgHex = rgbStringToHex(styles.backgroundColor);
+        if (!fgHex || !bgHex) return;
+        const ratio = contrastRatio(fgHex, bgHex);
+        const passed = ratio >= 4.5;
 
-        if (hex === "#f2f2f2") {
-          fb.textContent =
-            "✗ That's already the broken color — pick something darker.";
-          fb.className = "feedback err";
-          return;
-        }
-
-        if (!hexToRgb(hex)) {
-          fb.textContent =
-            "✗ Not a valid hex color. Try something like #FFFFFF...";
-          fb.className = "feedback err";
-          return;
-        }
-
-        const ratio = contrastRatio(hex, BG);
-
-        if (ratio >= 4.5) {
-          fb.textContent =
-            "✓ Contrast ratio " +
-            ratio.toFixed(2) +
-            ":1 — WCAG AA passed! Moving on...";
-          fb.className = "feedback ok";
-          document.getElementById("contrast-input").disabled = true;
-          document.querySelector(".btn-submit").disabled = true;
-          setTimeout(() => {
-            window.location = "04-off-screen-content.html";
-          }, 1600);
-        } else {
-          fb.textContent =
-            "✗ Contrast ratio is only " +
-            ratio.toFixed(2) +
-            ":1 — WCAG AA requires 4.5:1. Try a darker color.";
-          fb.className = "feedback err";
-        }
+        status.textContent =
+          "Current contrast: " +
+          ratio.toFixed(2) +
+          ":1 (" +
+          (passed ? "PASS" : "needs 4.5:1") +
+          ")";
+        status.style.color = passed ? "#16a34a" : "#b0b5d0";
+        next.style.display = passed ? "block" : "none";
       }
+
+      setInterval(checkContrastFixed, 400);
     </script>
   </body>
 </html>

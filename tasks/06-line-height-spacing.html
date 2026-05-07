@@ -29,8 +29,8 @@
           >
           Fix the spacing so the text becomes readable.
           <strong
-            >Once the text has enough room to breathe, the answer field will
-            unlock.</strong
+            >Once the text has enough room to breathe, a continue button will
+            appear automatically.</strong
           >
           Follow the WCAG guidelines for readability and
           <code
@@ -43,6 +43,13 @@
               color: #5865f5;
             "
             >line-height</code
+          >. <br /><br />
+          Official reference:
+          <a
+            href="https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            >WCAG 2.2 — Text Spacing</a
           >.
         </p>
       </div>
@@ -106,28 +113,60 @@
             <strong>Styles</strong>, find
             <code>line-height: 0.4</code>.<br /><br />
             <strong>Step 2:</strong> Try changing the value live in DevTools —
-            the text should start to breathe. The answer field unlocks
+            the text should start to breathe. A continue button appears
             automatically when the spacing is fixed.<br /><br />
             <strong>Step 3:</strong> WCAG recommends a minimum of 1.5 for body
-            text. Enter the value you used, using a period for the decimal
-            point.
+            text.
           </div>
         </details>
       </div>
 
-      <form class="answer-row" onsubmit="checkLineHeight(event)">
-        <input
-          type="text"
-          class="answer-input"
-          id="lh-input"
-          placeholder="Enter the line height value, e.g. 1.2"
-          autocomplete="off"
-          spellcheck="false"
-          disabled
-        />
-        <button type="submit" class="btn-submit" disabled>Submit</button>
-      </form>
-      <div class="feedback" id="feedback"></div>
+      <div
+        id="spacing-status"
+        style="
+          margin-top: 4px;
+          font-size: 13px;
+          color: #b0b5d0;
+          font-weight: 500;
+        "
+      >
+        Current line-height: checking...
+      </div>
+      <div
+        id="next-btn"
+        style="
+          display: none;
+          margin-top: 1rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid #dde1f5;
+        "
+      >
+        <p
+          style="
+            font-size: 13px;
+            color: #16a34a;
+            font-weight: 600;
+            margin-bottom: 10px;
+          "
+        >
+          &#10003; Spacing is readable now!
+        </p>
+        <a
+          href="07-click-blocking-overlay.html"
+          style="
+            display: inline-block;
+            background: #5865f5;
+            color: #fff;
+            font-family: -apple-system, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+          "
+          >Next bug report &rarr;</a
+        >
+      </div>
     </div>
 
     <script src="../game.js"></script>
@@ -141,49 +180,23 @@
         const lh = parseFloat(rawLineHeight);
         const fs = parseFloat(styles.fontSize);
         const ratio = lh / fs;
-
-        const input = document.querySelector(".answer-input");
-        const btn = document.querySelector(".btn-submit");
+        const status = document.getElementById("spacing-status");
+        const next = document.getElementById("next-btn");
         const unlocked = rawLineHeight === "normal" || ratio >= 1.5;
 
-        input.disabled = !unlocked;
-        btn.disabled = !unlocked;
+        if (rawLineHeight === "normal") {
+          status.textContent = "Current line-height: normal (PASS)";
+        } else {
+          status.textContent =
+            "Current line-height ratio: " +
+            ratio.toFixed(2) +
+            (unlocked ? "PASS" : "");
+        }
+        status.style.color = unlocked ? "#16a34a" : "#b0b5d0";
+        next.style.display = unlocked ? "block" : "none";
       }
 
       setInterval(checkLineHeightFixed, 400);
-
-      function checkLineHeight(e) {
-        e.preventDefault();
-        const raw = document.getElementById("lh-input").value.trim();
-        const val = parseFloat(raw);
-        const fb = document.getElementById("feedback");
-
-        if (isNaN(val)) {
-          fb.textContent = "✗ Enter a number.";
-          fb.className = "feedback err";
-          return;
-        }
-
-        if (val === 0.4) {
-          fb.textContent = "✗ That's the broken value.";
-          fb.className = "feedback err";
-          return;
-        }
-
-        if (val < 1.5) {
-          fb.textContent = "✗ Still too tight — try a higher value.";
-          fb.className = "feedback err";
-          return;
-        }
-
-        fb.textContent = "✓ Room to breathe! Moving on...";
-        fb.className = "feedback ok";
-        document.getElementById("lh-input").disabled = true;
-        document.querySelector(".btn-submit").disabled = true;
-        setTimeout(() => {
-          window.location = "07-click-blocking-overlay.html";
-        }, 1400);
-      }
     </script>
   </body>
 </html>
